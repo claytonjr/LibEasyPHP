@@ -19,7 +19,7 @@ class String {
     /**
      * LTrim() returns a string containing a copy of a specified string without leading spaces (LTrim()), trailing spaces (RTrim()), or both leading and trailing spaces (Trim()).
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
-     * @return string $Trim
+     * @return string $LTrim
      */
 
     public function LTrim($String) {
@@ -30,7 +30,7 @@ class String {
     /**
      * RTrim() returns a string containing a copy of a specified string without leading spaces (LTrim()), trailing spaces (RTrim()), or both leading and trailing spaces (Trim()).
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
-     * @return string $Trim
+     * @return string $RTrim
      */
 
     public function RTrim($String) {
@@ -52,11 +52,12 @@ class String {
     /**
      * Mid() will return a string containing a specified number of characters from the of a string.
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
-     * @param string $Length Required. Character position in string at which the part to be taken begins. If start is greater than the number of characters in string, Mid() returns a zero-length string ("").
+     * @param number $Start Optional. Default is 0. The starting position for the search. 
+     * @param number $Length Required. Character position in string at which the part to be taken begins. If start is greater than the number of characters in string, Mid() returns a zero-length string ("").
      * @return string $Mid
      */
 
-    public function Mid($String, $Start, $Length) {
+    public function Mid($String, $Start = 0, $Length) {
         $Mid = substr($String, $Start, $Length); 
         return $Mid;
     }
@@ -64,7 +65,7 @@ class String {
     /**
      * Left() will return a string containing a specified number of characters from the left side of a string.
      * @param string $String Required. No default. String expression from which the leftmost characters are returned. If string contains null, null is returned.
-     * @param string $Length Required. Numeric expression indicating how many characters to return. If 0, a zero-length string ("") is returned. If greater than or equal to the number of characters in string, the entire string is returned.
+     * @param number $Length Required. Numeric expression indicating how many characters to return. If 0, a zero-length string ("") is returned. If greater than or equal to the number of characters in string, the entire string is returned.
      * @return string $Left
      */
 
@@ -76,7 +77,7 @@ class String {
     /**
      * Right() will return a string containing a specified number of characters from the right side of a string.
      * @param string $String Required. No default. String expression from which the rightmost characters are returned. If string contains null, null is returned.
-     * @param string $Length Required. Numeric expression indicating how many characters to return. If 0, a zero-length string ("") is returned. If greater than or equal to the number of characters in string, the entire string is returned.
+     * @param number $Length Required. Numeric expression indicating how many characters to return. If 0, a zero-length string ("") is returned. If greater than or equal to the number of characters in string, the entire string is returned.
      * @return string $Right
      */
 
@@ -125,11 +126,6 @@ class String {
      * LCase() will take a string and return a lower cased string. 
      * @param string $String Required. No default. 
      * @return string
-     * 
-     * <code>
-     *  echo(LCase('Hello, world!'));
-     *  Will return 'hello, world!'
-     * </code>
      */
 
     public function LCase($String) {    
@@ -141,11 +137,6 @@ class String {
      * PCase() will take a string and return a propper cased string. 
      * @param string $String Requird. No default. 
      * @return string
-     *  
-     * <code>
-     *  echo(PCase('Hello, world!'));
-     *  Will return 'Hello, World!'
-     * </code>
      */
 
     public function PCase($String) {
@@ -157,11 +148,6 @@ class String {
      * UCase will take a string and return a upper cased string. 
      * @param string $String Required. No default. 
      * @return string
-     * 
-     * <code>
-     *  echo(UCase('Hello, world!'));
-     *  Will return 'HELLO, WORLD'
-     * </code>
      */
 
     public function UCase($String) {

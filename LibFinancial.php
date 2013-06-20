@@ -12,26 +12,6 @@
 class Financial {
 	
 	/**
-     * Mortgage() returns a number, how much a mortgage will cost. 
-     * @param number $Apr Required. No default. The annual percentage rate of the loan. 
-     * @param number $Payments Required. No default. The number of monthly payments. 360 for 30 year loan. 
-     * @param number $PresentValue Required. No default. Present value, or principle of the loan. 
-     * @param number $FutureValue Required. No default. Future value of the loan. 
-     * @param number $Precision Required. No default. Precision you with to round to. 
-     * @return string $Mortgage
-     */
-
-	public function Mortgage($Apr, $Payments, $PresentValue, $FutureValue, $Precision) {
-		if($Apr != 0) {
-			$Alpha = 1 / (1 + $Apr / 12);
-			$RetVal = round($PresentValue * (1 - $Alpha) / $Alpha / (1 - pow($Alpha, $Payments)), $Precision);
-		} else {
-			$RetVal = round($PresentValue / $Payments, $Precision);	
-		}
-		return $RetVal;
-	}
-
-	/**
 	 * FutureValue() returns the future value of an investment based on periodic, constant payments and a constant interest rate. Alias for Fv(). 
 	 * @param number $Rate Required. Rate is the interest rate per period. For example, if you obtain an automobile loan at a 10 percent annual interest rate and make monthly payments, your interest rate per month is 10%/12, or 0.83%. You would enter 10%/12, or 0.83%, or 0.0083, into the formula as the rate. 
 	 * @param number $Periods Required. Periods is the total number of payment periods in an annuity. For example, if you get a four-year car loan and make monthly payments, your loan has 4*12 (or 48) periods. You would enter 48 into the formula for periods. 
@@ -52,9 +32,19 @@ class Financial {
 	 * @return number $FutureValue Returns the future value of an investment based on periodic, constant payments and a constant interest rate.
 	 */
 
-	public function Fv($Rate, $Periods, $PresentValue) {
+	public function Fv($Rate, $Periods, $PresentValue = 0) {
 		$FutureValue = $PresentValue * (pow((1 + $Rate), $Periods));
 		return $FutureValue;
+	}
+
+	public function FutureValueOfAnnuity($Rate, $Periods, $Payments) {
+		$FutureValueOfAnnuity = $Payments * ((pow((1 + $Rate), $Periods ) - 1) / $Rate);
+		return $FutureValueOfAnnuity;
+	}
+
+	public function Fvoa($Rate, $Periods, $Payments) {
+		$FutureValueOfAnnuity = $Payments * ((pow((1 + $Rate), $Periods ) - 1) / $Rate);
+		return $FutureValueOfAnnuity;
 	}
 
 	/**
@@ -84,32 +74,95 @@ class Financial {
 	}
 
 	/**
-	 * The CompoundInterest() formula calculates the amount of interest earned on an account or investment where the amount earned is reinvested. By reinvesting the amount earned, an investment will earn money based on the effect of compounding. Compounding is the concept that any amount earned on an investment can be reinvested to create additional earnings that would not be realized based on the original principal, or original balance, alone. The interest on the original balance alone would be called simple interest. The additional earnings plus simple interest would equal the total amount earned from compound interest.
-	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * The CompoundInterest() formula calculates the amount of interest earned on an account or investment where the amount earned is reinvested. By reinvesting the amount earned, an investment will earn money based on the effect of compounding. Compounding is the concept that any amount earned on an investment can be reinvested to create additional earnings that would not be realized based on the original principal, or original balance, alone. The interest on the original balance alone would be called simple interest. The additional earnings plus simple interest would equal the total amount earned from compound interest. Alias of CInterest().
 	 * @param number $Rate Required. No default. The interest rate per period. 
-	 * @param number $Period. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
-	 * @return number $PresentValue Returns the present value of an investment. The present value is the total amount that a series of future payments is worth now. For example, when you borrow money, the loan amount is the present value to the lender.
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $CompoundInterest
 	 */
 
-	public function CompoundInterest($Principle, $Rate, $Periods) {
+	public function CompoundInterest($Rate, $Periods, $Principle) {
 		$CompoundInterest = $Principle * (pow((1 + $Rate), $Periods) - 1);
 		return $CompoundInterest;
 	}
 
-	public function CInterest($Principle, $Rate, $Periods) {
+	/**
+	 * The CInterest() formula calculates the amount of interest earned on an account or investment where the amount earned is reinvested. By reinvesting the amount earned, an investment will earn money based on the effect of compounding. Compounding is the concept that any amount earned on an investment can be reinvested to create additional earnings that would not be realized based on the original principal, or original balance, alone. The interest on the original balance alone would be called simple interest. The additional earnings plus simple interest would equal the total amount earned from compound interest. Alias of CompoundInterest().
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $CompoundInterest
+	 */
+
+	public function CInterest($Rate, $Periods, $Principle) {
 		$CompoundInterest = $Principle * (pow((1 + $Rate), $Periods) - 1);
 		return $CompoundInterest;
 	}
 
-	public function SimpleInterest($Principle, $Rate, $Periods) {
+	/**
+	 * SimpleInterest(): The simple interest formula is used to calculate the interest accrued on a loan or savings account that has simple interest. The simple interest formula is fairly simple to compute and to remember as principal times rate times time. An example of a simple interest calculation would be a 3 year saving account at a 10% rate with an original balance of $1000. By inputting these variables into the formula, $1000 times 10% times 3 years would be $300. Simple interest is money earned or paid that does not have compounding. Compounding is the effect of earning interest on the interest that was previously earned. As shown in the previous example, no amount was earned on the interest that was earned in prior years. As with any financial formula, it is important that rate and time are appropriately measured in relation to one another. If the time is in months, then the rate would need to be the monthly rate and not the annual rate. Alias of SInterest()
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $SimpleInterest 
+	 */
+
+	public function SimpleInterest($Rate, $Periods, $Principle) {
 		$SimpleInterest = ($Principle * $Rate * $Periods);
 		return $SimpleInterest;
 	}
 
-	public function SInterest($Principle, $Rate, $Periods) {
+	/**
+	 * SInterest(): The simple interest formula is used to calculate the interest accrued on a loan or savings account that has simple interest. The simple interest formula is fairly simple to compute and to remember as principal times rate times time. An example of a simple interest calculation would be a 3 year saving account at a 10% rate with an original balance of $1000. By inputting these variables into the formula, $1000 times 10% times 3 years would be $300. Simple interest is money earned or paid that does not have compounding. Compounding is the effect of earning interest on the interest that was previously earned. As shown in the previous example, no amount was earned on the interest that was earned in prior years. As with any financial formula, it is important that rate and time are appropriately measured in relation to one another. If the time is in months, then the rate would need to be the monthly rate and not the annual rate. Alias of SimpleInterest()
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $SimpleInterest
+	 */
+
+	public function SInterest($Rate, $Periods, $Principle) {
 		$SimpleInterest = ($Principle * $Rate * $Periods);
 		return $SimpleInterest;
 	}
+
+	/**
+	 * SimpleInterestEndingBalance() The ending balance, or future value, of an account with simple interest can be calculated using the following formula: $SimpleInterestEndingBalance = $Principle * (1 + ($Rate * $Periods)); Using the prior example of a $1000 account with a 10% rate, after 3 years the balance would be $1300. This can be determined by multiplying the $1000 original balance times [1+(10%)(3)], or times 1.30. Instead of using this alternative formula, the amount earned could be simply added to the original balance to find the ending balance. Still using the prior example, the calculation of the formula that is on the top of the page showed $300 of interest. By adding $300 to the original amount of $1000, the result would be $1300. Alias of Sieb().
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $SimpleInterestEndingBalance 
+	 */
+
+	public function SimpleInterestEndingBalance($Rate, $Periods, $Principle) {
+		$SimpleInterestEndingBalance = $Principle * (1 + ($Rate * $Periods));
+		return $SimpleInterestEndingBalance;
+	}
+
+	/**
+	 * Sieb() The ending balance, or future value, of an account with simple interest can be calculated using the following formula: $SimpleInterestEndingBalance = $Principle * (1 + ($Rate * $Periods)); Using the prior example of a $1000 account with a 10% rate, after 3 years the balance would be $1300. This can be determined by multiplying the $1000 original balance times [1+(10%)(3)], or times 1.30. Instead of using this alternative formula, the amount earned could be simply added to the original balance to find the ending balance. Still using the prior example, the calculation of the formula that is on the top of the page showed $300 of interest. By adding $300 to the original amount of $1000, the result would be $1300. Alias of Sieb().
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @return number $SimpleInterestEndingBalance 
+	 */
+
+	public function Sieb($Rate, $Periods, $Principle) {
+		$SimpleInterestEndingBalance = $Principle * (1 + ($Rate * $Periods));
+		return $SimpleInterestEndingBalance;
+	}
+
+	/**
+	 * The Annual Percentage Yield (APY), referenced as the effective annual rate in Finance, is the rate of interest that is earned when taking into consideration the effect of compounding.
+	 *
+	 * There are various terms used when compounding is not considered including nominal interest rate, stated annual interest rate, and annual percentage rate(APR).
+	 *
+	 * In the formula, the stated interest rate is shown as r. A bank may show this as simply "interest rate". The annual percentage yield formula would be applied to determine what the effective yield would be if the account was compounded given the stated rate. The n in the annual percentage yield formula would be the number of times that the financial institution compounds. For example, if a financial institution compounds the account monthly, n would equal 12. 
+	 *
+	 * Example of Annual Percentage Yield: An account states that its rate is 6% compounded monthly. The rate, or r, would be .06, and the number of times compounded would be 12 as there are 12 months in a year. After simplifying, the annual percentage yield is shown as 6.168%.
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Periods. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @return number $Apy 
+	 */
 
 	public function Apy($Rate, $Periods) {
 		$Apy = (pow((1 + $Rate / $Periods), $Periods) - 1);
