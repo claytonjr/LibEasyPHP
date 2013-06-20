@@ -11,8 +11,23 @@
 
 class Utility {
 
-  public function PrintLine($Variable) {
-		$PrintLine = print($Variable . '<br />' . "\n");
+  public function PrintLine($Variable, $Mode = 'Break') {
+		if($Mode == 'Break') {
+			$PrintLine = print($Variable . '<br />' . "\n");
+		} elseif($Mode == 'Paragraph') {
+			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
+		} elseif($Mode == 'b') {
+			$PrintLine = print($Variable . '<br />' . "\n");
+		} elseif($Mode == 'p') {
+			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
+		} elseif($Mode == 'NewLine') {
+			$PrintLine = print($Variable . "\n");
+		} elseif($Mode == 'nl') {
+			$PrintLine = print($Variable . "\n");
+		} else {
+			$PrintLine = print($Variable . '<br />' . "\n");
+		}
+
 		return $PrintLine;
 	}
 
@@ -52,6 +67,26 @@ class Utility {
 	public function PHPVersion() {
 		$PHPVersion = phpversion();
 		return $PHPVersion;
+	}
+
+	public function IniGet($Variable) {
+		$IniGet = ini_get($Variable);
+		return $IniGet;
+	}
+
+	public function IniSet($Variable, $Value) {
+		$IniSet = ini_set($Variable, $Value);
+		return $IniSet;
+	}
+
+	public function DisplayErrors($Boolean) {
+		if($Boolean == True) {
+			$this -> IniSet('display_errors', '1');
+		} elseif($Boolean == False) {
+			$this -> IniSet('display_errors', '0');
+		} else {
+			$this -> IniSet('display_errors', '1');
+		}
 	}
 }
 

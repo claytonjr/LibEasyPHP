@@ -10,6 +10,7 @@
  */
 
 class DataManipulation {
+
   /**
 	 * TypeCast() will take various forms of a variable, and type cast to another type. 
 	 * @param various $Variable Required. No default. Variable to typecast. 
@@ -38,8 +39,8 @@ class DataManipulation {
 			$TypeCast = (object) $Variable;
 		} elseif($DataType == 'Array') {
 			$TypeCast = (array) $Variable;
-		} elseif($DataType == 'Binary') {
-			$TypeCast = (binary) $Variable;
+		} else {
+			$TypeCast = (string) $Variable;
 		}
 
 		return $TypeCast;
@@ -96,7 +97,7 @@ class DataManipulation {
 	}
 
 	/**
-	 * CInteger() will type cast a given variable to a integer state. 
+	 * CInteger() will type cast a given variable to a integer state. Alias of CInt().
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
 	 * @return integer $CInteger. Will return variable to an integer state. 
 	 * 
@@ -106,6 +107,21 @@ class DataManipulation {
 	 */
 
 	public function CInteger($Variable) {
+		$CInteger = (int) $Variable;
+		return $CInteger;
+	}
+
+	/**
+	 * CInt() will type cast a given variable to a integer state. Alias of CInteger().
+	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
+	 * @return integer $CInteger. Will return variable to an integer state. 
+	 * 
+	 * <code>
+	 *  
+	 * </code>
+	 */
+
+	public function CInt($Variable) {
 		$CInteger = (int) $Variable;
 		return $CInteger;
 	}

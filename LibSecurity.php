@@ -9,4 +9,8 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+class Security {
+	
+}
+
 ?>

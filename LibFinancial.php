@@ -83,6 +83,14 @@ class Financial {
 		return $PresentValue;
 	}
 
+	/**
+	 * The CompoundInterest() formula calculates the amount of interest earned on an account or investment where the amount earned is reinvested. By reinvesting the amount earned, an investment will earn money based on the effect of compounding. Compounding is the concept that any amount earned on an investment can be reinvested to create additional earnings that would not be realized based on the original principal, or original balance, alone. The interest on the original balance alone would be called simple interest. The additional earnings plus simple interest would equal the total amount earned from compound interest.
+	 * @param number $Principle Required. No default. The principle, or original balance. 
+	 * @param number $Rate Required. No default. The interest rate per period. 
+	 * @param number $Period. Required. No default. Number of periods. For example, if an account is compounded monthly, then one month would be one period. Likewise, if the account is compounded daily, then one day would be one period and the rate and number of periods would accommodate this.
+	 * @return number $PresentValue Returns the present value of an investment. The present value is the total amount that a series of future payments is worth now. For example, when you borrow money, the loan amount is the present value to the lender.
+	 */
+
 	public function CompoundInterest($Principle, $Rate, $Periods) {
 		$CompoundInterest = $Principle * (pow((1 + $Rate), $Periods) - 1);
 		return $CompoundInterest;
