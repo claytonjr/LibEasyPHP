@@ -20,18 +20,20 @@ include_once('LibScience.php');
 include_once('LibSecurity.php');
 include_once('LibString.php');
 include_once('LibUtility.php');
+include_once('LibHtml.php');
 
-$db = new Database;
-$dm = new DataManipulation;
-$date = new Date;
-$fs = new FileSystem;
-$fin = new Financial;
-$math = new Math;
-$net = new Network;
-$sci = new Science;
-$sec = new Security;
-$str = new String;
-$util = new Utility;
+$db = new Database();
+$dm = new DataManipulation();
+$date = new Date();
+$fs = new FileSystem();
+$fin = new Financial();
+$html = new Html();
+$math = new Math();
+$net = new Network();
+$sci = new Science();
+$sec = new Security();
+$str = new String();
+$util = new Utility();
 
 /**
  * DisplayErrors() True or False. Optional. Default is True. Will display errors when called. 
