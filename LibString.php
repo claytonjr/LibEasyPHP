@@ -11,8 +11,31 @@
 
 class String {
 
-    public function InStr($String, $Match, $Start = 1, $Direction = 'Forward') {
-        $InStr = strpos($String, $Match, $Start);
+    /**
+     * InStr() returns a number specifying the position of the first occurrence of one string within another.
+     * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
+     * @param string $Match Required. No default. String expression sought.
+     * @param number $Start Optional. Default is 0. Starting position of the search. 
+     * @param string $Direction Optional. Default is 'Forward'. Direction which search is performed. Options are 'Forward', 'Reverse', 'F', or 'R'.
+     * @param boolean $Case Optional. Default is 'False'. Options are 'False', 'True', 'F', or 'T'
+     * @return number $InStr
+     */
+
+    public function InStr($String, $Match, $Start = 0, $Direction = 'Forward', $Case = 'False') {
+        if($Direction == 'Forward' or $Direction == 'F') {
+            if($Case == 'False' or $Case == 'F') {
+                $InStr = stripos($String, $Match, $Start);
+            } elseif($Case == 'True' or $Case == 'T') {
+                $InStr = strpos($String, $Match, $Start);
+            } 
+        } elseif($Direction == 'Reverse' or $Direction == 'R') {
+            if($Case == 'False' or $Case == 'F') {
+                $InStr = strripos($String, $Match, $Start);
+            } elseif($Case == 'True' or $Case == 'T') {
+                $InStr = strrpos($String, $Match, $Start);
+            }
+        }
+
         return $InStr;
     } 
 

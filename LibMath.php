@@ -31,12 +31,23 @@ class Math {
 	}
 
 	/**
-	 * The Square() function will square a given number. 
+	 * The Square() function will square a given number. Alias of Sqr()
 	 * @param number $Number Required. No default. 
 	 * @return number $Square 
 	 */
 
 	public function Square($Number) {
+		$Square = $Number * $Number;
+		return $Square;
+	}
+
+	/**
+	 * The Sqr() function will square a given number. Alias of Square().
+	 * @param number $Number Required. No default. 
+	 * @return number $Square 
+	 */
+
+	public function Sqr($Number) {
 		$Square = $Number * $Number;
 		return $Square;
 	}
