@@ -6,7 +6,7 @@
  * @version 0.0.1
  * @copyright (c) 2013, James Clayton
  * @package LibDate
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
 class Date {
