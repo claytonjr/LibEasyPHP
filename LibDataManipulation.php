@@ -170,21 +170,6 @@ class DataManipulation {
 		$CArray = (array) $Variable;
 		return $CArray;
 	}
-
-	/**
-	 * CBinary() will type cast a given variable to a binary state. 
-	 * @param various $Variable Required. No default. Variable to be to be type cast to a binary state. 
-	 * @return binary $CBinary. Will return variable to an binary state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
-	 */
-
-	public function CBinary($Variable) {
-		$CBinary = (binary) $Variable;
-		return $CBinary;
-	}
 }
 
 ?>
