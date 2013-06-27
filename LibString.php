@@ -12,7 +12,7 @@
 class String {
 
     /**
-     * InStr() returns a number specifying the position of the first occurrence of one string within another.
+     * InStr() returns a number specifying the position of the first occurrence of one string within another. 
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
      * @param string $Match Required. No default. String expression sought.
      * @param number $Start Optional. Default is 0. Starting position of the search. 
@@ -38,6 +38,42 @@ class String {
 
         return $InStr;
     } 
+
+    public function InStrFwd($String, $Match, $Start = 0, $Case = 'False') {
+        if($Case == 'False' or $Case == 'F') {
+            $InStrFwd = stripos($String, $Match, $Start);
+            $Success = True;
+        } elseif($Case == 'True' or $Case == 'T') {
+            $InStrFwd = strpos($String, $Match, $Start);
+            $Success = True;
+        } else {
+            $InStrFwd = Null;
+            $Success = False;
+        }
+
+        return array(
+            'Output' => $InStrFwd, 
+            'Success' => $Success
+        );
+    }
+
+    public function InStrRev($String, $Match, $Start = -1, $Case = 'False') {
+        if($Case == 'False' or $Case == 'F') {
+            $InStrRev = strripos($String, $Match, $Start);
+            $Success = True; 
+        } elseif($Case == 'True' or 'T') {
+            $InStrRev = strrpos($String, $Match, $Start);
+            $Success = True;
+        } else {
+            $InStrRev = Null;
+            $Success = False;
+        }
+
+        return array(
+            'Output' => $InStrRev,
+            'Success' => $Success
+        );
+    }
 
     /**
      * LTrim() returns a string containing a copy of a specified string without leading spaces (LTrim()), trailing spaces (RTrim()), or both leading and trailing spaces (Trim()).

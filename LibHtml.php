@@ -31,11 +31,18 @@ class Html {
 			$PrintLine = print($Variable . "\n");
 		} elseif($Mode == 'nl') {
 			$PrintLine = print($Variable . "\n");
+		} elseif($Mode == 'pre') {
+			$PrintLine = print('<pre>' . $Variable . '</pre>' . "\n");
 		} else {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		}
 
 		return $PrintLine;
+	}
+
+	public function Pre($Text) {
+		$Pre = print('<pre>' . $Text . '</pre>');
+		return $Pre;
 	}
 }
 

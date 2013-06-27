@@ -11,7 +11,11 @@
 
 class FileSystem {
 
-  /**
+	public function FileExt($File) {
+
+	}
+
+  	/**
 	 * The BaseName() function returns the file name from a path.
 	 * @param string $Path Required. No default. Specifies the path to check. 
 	 * @param string $Suffix Optional. No default. Specifies a file extension. If the file name has this file extension, the file extension will not show

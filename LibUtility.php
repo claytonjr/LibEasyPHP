@@ -9,14 +9,49 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+include_once('LibConfig.php');
+
 class Utility {
 
-  public function PrintLine($Variable, $Mode = 'Break') {
+  	/**
+	 * Execute will execute an external command, and display the raw output. 
+	 * @param string $Command Required. No default. The external command to execute. 
+	 * @param boolean $Output Optional. Default is 'True'. Options are 'True', 'T', 'False', or 'F'. 
+	 * @return various $Execute Returns the raw output, text or binary, from the external command executed. 
+	 */
+
+  	public function Execute($Command, $Output = 'True') {
+  		if($Output == 'True' or $Output == 'T') {
+  			$Execute = passthru($Command, $CommandOutput);
+  			$Success = True;
+  			return $CommandOutput;
+  		} elseif($Output == 'False' or $Output == 'F') {
+  			$Execute = passthru($Command);
+  			$Success = True;
+  		} else {
+  			$Execute = Null;
+  			$Success = False;
+  		}
+
+  		return array(
+  			'Output' => $Execute,
+  			'Success' => $Success
+  		);
+  	}
+
+  	/**
+	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR. 
+	 * @param string $Variable Required. No default. The string to be displayed on output. 
+	 * @param string $Mode Optional. Default is 'Break'. Options are 'Break', 'Paragraph', 'br', 'p', or 'nl'. 
+	 * @return string $PrintLine Returns newly formated string for HTML markup. 
+	 */
+
+	public function PrintLine($Variable, $Mode = 'Break') {
 		if($Mode == 'Break') {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		} elseif($Mode == 'Paragraph') {
 			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
-		} elseif($Mode == 'b') {
+		} elseif($Mode == 'br') {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		} elseif($Mode == 'p') {
 			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
