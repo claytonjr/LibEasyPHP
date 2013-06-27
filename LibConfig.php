@@ -43,6 +43,6 @@ $util = new Utility();
  * DisplayErrors() True or False. Optional. Default is True. Will display errors when called. 
  */
 
-$util -> DisplayErrors(True);
+$util -> DisplayErrors('True');
 
 ?>

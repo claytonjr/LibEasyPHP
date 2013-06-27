@@ -11,38 +11,45 @@
 
 class Utility {
 
+  	public function Import($File) {
+  		$Import = include_once($File);
+  		return $Import;
+  	}
+
   	/**
 	 * Execute will execute an external command, and display the raw output. 
 	 * @param string $Command Required. No default. The external command to execute. 
 	 * @param boolean $GenOutput Optional. Default is 'False'. Options are 'True', or 'False'. 
-	 * @return various $Execute Returns the raw output, text or binary, from the external command executed. 
+	 * @return array $Execute Execute() will return three items: Output, Status, and Note in an array format. 
 	 */
 
   	public function Execute($Command, $GenOutput = 'False') {
-  		if($Output == 'True') {
+  		if($GenOutput == 'True') {
   			$Execute = passthru($Command, $CommandOutput);
-  			$Success = 'True';
+  			$Status = 'True';
   			$Note = 'Success';
-  			return $CommandOutput;
-  		} elseif($Output == 'False') {
+  			//return $CommandOutput;
+  		} elseif($GenOutput == 'False') {
   			$Execute = passthru($Command);
-  			$Success = 'True';
+  			$Status = 'True';
   			$Note = 'Success';
   		} else {
   			$Execute = 'False';
-  			$Success = 'False';
+  			$Status = 'False';
   			$Note = 'Execute does not have proper parameters: True or False.';
   		}
 
-  		return array(
+  		$Execute = array(
   			'Output' => $Execute,
-  			'Success' => $Success,
+  			'Status' => $Status,
   			'Note' => $Note
   		);
+
+  		return $Execute;
   	}
 
   	/**
-	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.. 
+	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.
 	 * @param string $Variable Required. No default. The string to be displayed on output. 
 	 * @param string $Mode Optional. Default is 'br'. Options are 'br', 'p', 'pre', or 'nl'. 
 	 * @return string $PrintLine Returns newly formated string for HTML markup. 
@@ -73,11 +80,6 @@ class Utility {
 	/**
 	 * Error() will throw a warning message, and exit the program. 
 	 * @param string $String Required. No default. The message displayed when warning is thrown. 
-	 * 
-	 * <code>
-	 *  Error('Input not defined! Exiting!'); 
-	 *  Will return 'Input not defined! Exiting!', and exit the program. 
-	 * </code>
 	 */
 
 	public function Error($String) {
@@ -89,16 +91,11 @@ class Utility {
 	 * Warning() will throw a warning message. 
 	 * @param string $String Required. No default. The message displayed when warning is thrown. 
 	 * @param boolean $Exit Optional. Default is False. If True, the program will exit, when warning is shown. 
-	 * 
-	 * <code>
-	 *  Warning('Input not defined! Exiting!', True); 
-	 *  Will return 'Input not defined! Exiting!', and exit the program. 
-	 * </code>
 	 */
 
-	public function Warning($String, $Exit = False) {
+	public function Warning($String, $Exit = 'False') {
 	    echo($String);
-	    if($Exit == True) {
+	    if($Exit == 'True') {
 			exit();
 	    }
 	}
@@ -108,23 +105,28 @@ class Utility {
 		return $PHPVersion;
 	}
 
-	public function IniGet($Variable) {
-		$IniGet = ini_get($Variable);
-		return $IniGet;
+	public function GetIni($Variable) {
+		$GetIni = ini_get($Variable);
+		return $GetIni;
 	}
 
-	public function IniSet($Variable, $Value) {
-		$IniSet = ini_set($Variable, $Value);
-		return $IniSet;
+	public function SetIni($Variable, $Value) {
+		$SetIni = ini_set($Variable, $Value);
+		return $SetIni;
 	}
 
-	public function DisplayErrors($Boolean) {
-		if($Boolean == True) {
-			$this -> IniSet('display_errors', '1');
-		} elseif($Boolean == False) {
-			$this -> IniSet('display_errors', '0');
+	/**
+	 * DisplayErrors() will tell the library to either display errors or not.  
+	 * @param boolean $Boolean Optional. Deault is False. 
+	 */
+
+	public function DisplayErrors($Boolean = 'False') {
+		if($Boolean == 'True') {
+			$this -> SetIni('display_errors', '1');
+		} elseif($Boolean == 'False') {
+			$this -> SetIni('display_errors', '0');
 		} else {
-			$this -> IniSet('display_errors', '1');
+			$this -> SetIni('display_errors', '1');
 		}
 	}
 }
