@@ -11,10 +11,6 @@
 
 class FileSystem {
 
-	public function FileExt($File) {
-
-	}
-
   	/**
 	 * The BaseName() function returns the file name from a path.
 	 * @param string $Path Required. No default. Specifies the path to check. 
@@ -54,7 +50,7 @@ class FileSystem {
 	/**
 	 * The ChangeOwner() function changes the owner of the specified file. Returns TRUE on success and FALSE on failure.
 	 * @param string $File Required. No default. Specifies the file to check. 
-	 * @param string $Mode Required. No default. Specifies the new owner. Can be a user name or a user ID.
+	 * @param string $Owner Required. No default. Specifies the new owner. Can be a user name or a user ID.
 	 * @return boolean $ChangeOwner Returns TRUE on success and FALSE on failure.
 	 */
 
@@ -106,7 +102,7 @@ class FileSystem {
 
 	/**
 	 * The DirectoryName() function returns the directory name from a path.
-	 * @param string $File Required. No default. Specifies the path to delete. 
+	 * @param string $Path Required. No default. Specifies the path to delete. 
 	 * @return string $DirectoryName 
 	 */
 

@@ -9,44 +9,46 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
-include_once('LibConfig.php');
-
 class Utility {
 
   	/**
 	 * Execute will execute an external command, and display the raw output. 
 	 * @param string $Command Required. No default. The external command to execute. 
-	 * @param boolean $Output Optional. Default is 'True'. Options are 'True', 'T', 'False', or 'F'. 
+	 * @param boolean $GenOutput Optional. Default is 'False'. Options are 'True', or 'False'. 
 	 * @return various $Execute Returns the raw output, text or binary, from the external command executed. 
 	 */
 
-  	public function Execute($Command, $Output = 'True') {
-  		if($Output == 'True' or $Output == 'T') {
+  	public function Execute($Command, $GenOutput = 'False') {
+  		if($Output == 'True') {
   			$Execute = passthru($Command, $CommandOutput);
-  			$Success = True;
+  			$Success = 'True';
+  			$Note = 'Success';
   			return $CommandOutput;
-  		} elseif($Output == 'False' or $Output == 'F') {
+  		} elseif($Output == 'False') {
   			$Execute = passthru($Command);
-  			$Success = True;
+  			$Success = 'True';
+  			$Note = 'Success';
   		} else {
-  			$Execute = Null;
-  			$Success = False;
+  			$Execute = 'False';
+  			$Success = 'False';
+  			$Note = 'Execute does not have proper parameters: True or False.';
   		}
 
   		return array(
   			'Output' => $Execute,
-  			'Success' => $Success
+  			'Success' => $Success,
+  			'Note' => $Note
   		);
   	}
 
   	/**
-	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR. 
+	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.. 
 	 * @param string $Variable Required. No default. The string to be displayed on output. 
-	 * @param string $Mode Optional. Default is 'Break'. Options are 'Break', 'Paragraph', 'br', 'p', or 'nl'. 
+	 * @param string $Mode Optional. Default is 'br'. Options are 'br', 'p', 'pre', or 'nl'. 
 	 * @return string $PrintLine Returns newly formated string for HTML markup. 
 	 */
 
-	public function PrintLine($Variable, $Mode = 'Break') {
+	public function PrintLine($Variable, $Mode = 'br') {
 		if($Mode == 'Break') {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		} elseif($Mode == 'Paragraph') {
@@ -59,6 +61,8 @@ class Utility {
 			$PrintLine = print($Variable . "\n");
 		} elseif($Mode == 'nl') {
 			$PrintLine = print($Variable . "\n");
+		} elseif($Mode == 'pre') {
+			$PrintLine = print('<pre>' . $Variable . '</pre>' . "\n");
 		} else {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		}

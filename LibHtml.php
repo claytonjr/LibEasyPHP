@@ -12,13 +12,13 @@
 class Html {
 
 	/**
-	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR. 
+	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.
 	 * @param string $Variable Required. No default. The string to be displayed on output. 
-	 * @param string $Mode Optional. Default is 'Break'. Options are 'Break', 'Paragraph', 'br', 'p', or 'nl'. 
+	 * @param string $Mode Optional. Default is 'br'. Options are 'br', 'p', 'pre', or 'nl'. 
 	 * @return string $PrintLine Returns newly formated string for HTML markup. 
 	 */
 
-	public function PrintLine($Variable, $Mode = 'Break') {
+	public function PrintLine($Variable, $Mode = 'br') {
 		if($Mode == 'Break') {
 			$PrintLine = print($Variable . '<br />' . "\n");
 		} elseif($Mode == 'Paragraph') {
@@ -41,7 +41,7 @@ class Html {
 	}
 
 	public function Pre($Text) {
-		$Pre = print('<pre>' . $Text . '</pre>');
+		$Pre = print('<pre>' . $Text . '</pre>' . "\n");
 		return $Pre;
 	}
 }

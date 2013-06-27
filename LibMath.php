@@ -12,20 +12,29 @@
 class Math {
   
 	/**
-	 * The EuclideanDistance() function will give the distance between two x,y cords. 
+	 * The EuclideanDistance() function will give the distance between two x,y cords. Alias for Ed().
 	 * @param number $Cord_X_1 Required. No default. 
 	 * @param number $Cord_Y_1 Required. No default. 
 	 * @param number $Cord_X_2 Required. No default. 
 	 * @param number $Cord_Y_2 Required. No default. 
-	 * @return number $Square 
+	 * @return number $EuclideanDistance 
 	 */
 
-	function EDistance($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
-		$EDistance = SqRt($this->Square($Cord_X_1 - $Cord_X_2) + $this->Square($Cord_Y_1 - $Cord_Y_2));
-		return $EDistance;
+	function EuclideanDistance($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
+		$EuclideanDistance = SqRt(Square($Cord_X_1 - $Cord_X_2) + Square($Cord_Y_1 - $Cord_Y_2));
+		return $EuclideanDistance;
 	}
 
-	function EuclideanDistance($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
+	/**
+	 * The Ed() function will give the distance between two x,y cords. Alias for EuclideanDistance().
+	 * @param number $Cord_X_1 Required. No default. 
+	 * @param number $Cord_Y_1 Required. No default. 
+	 * @param number $Cord_X_2 Required. No default. 
+	 * @param number $Cord_Y_2 Required. No default. 
+	 * @return number $EuclideanDistance 
+	 */
+
+	function Ed($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
 		$EuclideanDistance = SqRt(Square($Cord_X_1 - $Cord_X_2) + Square($Cord_Y_1 - $Cord_Y_2));
 		return $EuclideanDistance;
 	}
