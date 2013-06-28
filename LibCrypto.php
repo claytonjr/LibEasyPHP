@@ -1,20 +1,16 @@
 <?php
 
 /**
- * LibGraphics - A library of functions for working with graphics. 
+ * LibCrypto - A library of functions for working with encryption. 
  * @author James Clayton <james.r.clayton@gmail.com>
  * @version 0.0.1
  * @copyright (c) 2013, James Clayton
- * @package LibGraphics
+ * @package LibCrypto
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
-class Graphics {
-	
-	public function GetGdVer() {
-		$GetGdVer = gd_info();
-		return $GetGdVer;
-	}
+class Crypto {
+
 }
 
 ?>

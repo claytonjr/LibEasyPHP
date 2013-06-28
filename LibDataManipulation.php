@@ -16,10 +16,6 @@ class DataManipulation {
 	 * @param various $Variable Required. No default. Variable to typecast. 
 	 * @param string $DataType Optional. Default is String. Options are String, Integer, Boolean, Float, Object, Array, Binary, and Unset.  
 	 * @return various $TypeCast
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function TypeCast($Variable, $DataType = 'String') {
@@ -50,10 +46,6 @@ class DataManipulation {
 	 * IsEmpty() will test if a variable is set. Will return true if variable is not set. Will return false if variable is set. 
 	 * @param various $Variable Required. No default. Variable to test if set or not. 
 	 * @return boolean $IsEmpty. Will return true if variable is not set. Will return false if variable is set. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function IsEmpty($Variable) {
@@ -70,10 +62,6 @@ class DataManipulation {
 	 * CBoolean() will type cast a given variable to a boolean state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a boolean state. 
 	 * @return boolean $CBoolean. Will return variable to an boolean state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CBoolean($Variable) {
@@ -85,10 +73,6 @@ class DataManipulation {
 	 * CString() will type cast a given variable to a string state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a string state. 
 	 * @return string $CString. Will return variable to an string state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CString($Variable) {
@@ -100,10 +84,6 @@ class DataManipulation {
 	 * CInteger() will type cast a given variable to a integer state. Alias of CInt().
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
 	 * @return integer $CInteger. Will return variable to an integer state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CInteger($Variable) {
@@ -115,10 +95,6 @@ class DataManipulation {
 	 * CInt() will type cast a given variable to a integer state. Alias of CInteger().
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
 	 * @return integer $CInteger. Will return variable to an integer state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CInt($Variable) {
@@ -130,10 +106,6 @@ class DataManipulation {
 	 * CFloat() will type cast a given variable to a float state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a float state. 
 	 * @return float $CFloat. Will return variable to an float state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CFloat($Variable) {
@@ -145,10 +117,6 @@ class DataManipulation {
 	 * CObject() will type cast a given variable to a object state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a object state. 
 	 * @return object $CObject. Will return variable to an object state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CObject($Variable) {
@@ -160,10 +128,6 @@ class DataManipulation {
 	 * CArray() will type cast a given variable to a array state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a array state. 
 	 * @return array $CArray. Will return variable to an array state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CArray($Variable) {
