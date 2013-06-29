@@ -10,8 +10,7 @@
  */
 
 class DataManipulation {
-
-  /**
+	/**
 	 * TypeCast() will take various forms of a variable, and type cast to another type. 
 	 * @param various $Variable Required. No default. Variable to typecast. 
 	 * @param string $DataType Optional. Default is String. Options are String, Integer, Boolean, Float, Object, Array, Binary, and Unset.  
