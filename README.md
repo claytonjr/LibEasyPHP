@@ -1,4 +1,4 @@
 LibEasyPHP
 ==========
 
-Making PHP a little easier and neater. 
+Making PHP a little neater and easier. 

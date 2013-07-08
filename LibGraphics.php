@@ -11,10 +11,6 @@
 
 class Graphics {
 	
-	public function GetGdVer() {
-		$GetGdVer = gd_info();
-		return $GetGdVer;
-	}
 }
 
 ?>

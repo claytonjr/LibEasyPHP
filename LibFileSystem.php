@@ -84,11 +84,11 @@ class FileSystem {
 	/**
 	 * The Delete() function deletes a file. This function returns TRUE on success, or FALSE on failure.
 	 * @param string $File Required. No default. Specifies the file to delete. 
-	 * @param string $Context Required. No default. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. 
+	 * @param string $Context Optional. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. 
 	 * @return boolean $Delete Returns TRUE on success and FALSE on failure.
 	 */
 
-	public function Delete($File, $Context) {
+	public function Delete($File, $Context = Null) {
 		if(unlink($File, $Context)) {
 			$Delete = True;
 		} elseif(!unlink($File, $Context)) {
@@ -276,9 +276,110 @@ class FileSystem {
 	 * @return boolean $GetCSV This function returns TRUE on success or FALSE on failure.
 	 */
 
-	public function GetCSV($File, $Length = Null, $Separator = Null, $Enclosure = Null) {
+	public function GetCSV($File, $Length = Null, $Separator = Null, $Enclosure = "\"") {
 		$GetCSV = fgetcsv($File, $Length, $Separator, $Enclosure);
 		return $GetCSV;
+	}
+
+	/**
+	 * The PutCSV() function formats a line as CSV and writes it to an open file. This function returns the length of the written string, or FALSE on failure. See also GetCSV().
+	 * @param string $File Required. No default. Specifies the open file to write. 
+	 * @param string $Fields Required. No default. Specifies which array to get the data from.
+	 * @param string $Separator Optional. Default is a comma (,). A character that specifies the field separator. 
+	 * @param string $Enclosure Optional. Default is double quote "". A character that specifies the field enclosure character. 
+	 * @return boolean $PutCSV This function returns TRUE on success or FALSE on failure.
+	 */
+
+	public function PutCSV($File, $Fields, $Separator = ',', $Enclosure = "\"") {
+		$PutCSV = fputcsv($File, $Fields, $Separator, $Enclosure);
+		return $PutCSV;
+	}
+
+	/**
+	 * The ReadFileIntoArray() reads a file into an array. Each array element contains a line from the file, with newline still attached. This function became binary-safe in PHP 4.3. (meaning that both binary data, like images, and character data can be written with this function).
+	 * @param string $Path Required. No default. Specifies the open file to read. 
+	 * @param number $IncludePath Optional. Default is NULL. Set this parameter to '1' if you want to search for the file in the include_path (in php.ini) as well.
+	 * @param string $Context Optional. Default is NULL. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. Can be skipped by using NULL.
+	 * @return boolean $ReadFileIntoArray This function returns TRUE on success or FALSE on failure.
+	 */
+
+	public function ReadFileIntoArray($Path, $IncludePath = Null, $Context = Null) {
+		$ReadFileIntoArray = file($Path, $IncludePath, $Context);
+		return $ReadFileIntoArray;
+	}
+
+	/**
+	 * The ReadFileIntoString() reads a file into a string. This function is the preferred way to read the contents of a file into a string. Because it will use memory mapping techniques, if this is supported by the server, to enhance performance. This function is binary-safe (meaning that both binary data, like images, and character data can be written with this function).
+	 * @param string $Path Required. No default. Specifies the open file to read. 
+	 * @param number $IncludePath Optional. Default is NULL. Set this parameter to '1' if you want to search for the file in the include_path (in php.ini) as well.
+	 * @param string $Context Optional. Default is NULL. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. Can be skipped by using NULL.
+	 * @param number $Start Optional. Specifies where in the file to start reading. This parameter was added in PHP 5.1. 
+	 * @param number $MaxLength Optional. Specifies how many bytes to read. This parameter was added in PHP 5.1.
+	 * @return array $ReadFileIntoString 
+	 */
+
+	public function ReadFileIntoString($Path, $IncludePath = Null, $Context = Null, $Start = Null, $MaxLength = Null) {
+		$ReadFileIntoString = file_get_contents($Path, $IncludePath, $Context, $Start, $MaxLength);
+		return $ReadFileIntoString;
+	}
+
+	/**
+	 * The FileExists() function checks whether or not a file or directory exists. This function returns TRUE if the file or directory exists, otherwise it returns FALSE.
+	 * @param string $Path Required. No default. Specifies the open file to read. 
+	 * @return boolean $FileExists This function returns TRUE if the file or directory exists, otherwise it returns FALSE.
+	 */
+
+	public function FileExists($Path) {
+		$FileExists = file_exists($Path);
+		return $FileExists;
+	}
+
+	/**
+	 * The WriteDataToFile() writes data to a file. Alias of PutFile()
+	 * This function follows these rules when accessing a file:
+	 * 1. If FILE_USE_INCLUDE_PATH is set, check the include path for a copy of file_name
+	 * 2. Create the file if it does not exist. 
+	 * 3. Open the file.
+	 * 4. Lock the file if LOCK_EX is set.
+	 * 5. If FILE_APPEND is set, move to the end of the file. Otherwise, clear the file contents.
+	 * 6. Write the data into the file.
+	 * 7. Close the file and release any locks.
+	 * This function returns the number of character written into the file on success, or FALSE on failure.
+	 * Note: Use FILE_APPEND to avoid deleting the existing content of the file.
+	 * @param string $Path Required. No default. Specifies the open file to write.
+	 * @param string $Data Required. The data to write to the file. Can be a string, an array or a data stream.
+	 * @param string $Mode Optional. Specifies how to open/write to the file. Possible values: FILE_USE_INCLUDE_PATH, FILE_APPEND, LOCK_EX.
+	 * @param string $Context Optional. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. 
+	 * @return number $WriteDataToFile This function returns the number of character written into the file on success, or FALSE on failure.
+	 */
+
+	public function WriteDataToFile($Path, $Data, $Mode = Null, $Context = Null) {
+		$WriteDataToFile = file_put_contents($Path, $Data, $Mode, $Context);
+		return $WriteDataToFile;
+	}
+
+	/**
+	 * The PutFile() writes data to a file. Alias of WriteDataToFile(). 
+	 * This function follows these rules when accessing a file:
+	 * 1. If FILE_USE_INCLUDE_PATH is set, check the include path for a copy of file_name
+	 * 2. Create the file if it does not exist. 
+	 * 3. Open the file.
+	 * 4. Lock the file if LOCK_EX is set.
+	 * 5. If FILE_APPEND is set, move to the end of the file. Otherwise, clear the file contents.
+	 * 6. Write the data into the file.
+	 * 7. Close the file and release any locks.
+	 * This function returns the number of character written into the file on success, or FALSE on failure.
+	 * Note: Use FILE_APPEND to avoid deleting the existing content of the file.
+	 * @param string $Path Required. No default. Specifies the open file to write.
+	 * @param string $Data Required. The data to write to the file. Can be a string, an array or a data stream.
+	 * @param string $Mode Optional. Specifies how to open/write to the file. Possible values: FILE_USE_INCLUDE_PATH, FILE_APPEND, LOCK_EX.
+	 * @param string $Context Optional. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. 
+	 * @return number $WriteDataToFile This function returns the number of character written into the file on success, or FALSE on failure.
+	 */
+
+	public function PutFile($Path, $Data, $Mode = Null, $Context = Null) {
+		$WriteDataToFile = file_put_contents($Path, $Data, $Mode, $Context);
+		return $WriteDataToFile;
 	}
 }
 

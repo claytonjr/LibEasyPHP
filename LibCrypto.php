@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LibCrypto - A library of functions for working with encryption. 
+ * LibCrypto - A library containing crypto specific funtions. 
  * @author James Clayton <james.r.clayton@gmail.com>
  * @version 0.0.1
  * @copyright (c) 2013, James Clayton
@@ -10,7 +10,7 @@
  */
 
 class Crypto {
-
+	
 }
 
 ?>

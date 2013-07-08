@@ -115,8 +115,13 @@ class Utility {
 		return $SetIni;
 	}
 
+	public function PutIni($Variable, $Value) {
+		$PutIni = ini_set($Variable, $Value);
+		return $PutIni;
+	}
+
 	/**
-	 * DisplayErrors() will tell the library to either display errors or not.  
+	 * DisplayErrors() will tell the library to either display errors or not. Option is set in LibConfig file. 
 	 * @param boolean $Boolean Optional. Deault is False. 
 	 */
 
@@ -128,6 +133,11 @@ class Utility {
 		} else {
 			$this -> SetIni('display_errors', '1');
 		}
+	}
+
+	public function Sleep($Seconds) {
+		$Sleep = sleep($Seconds);
+		return $Sleep;
 	}
 }
 
