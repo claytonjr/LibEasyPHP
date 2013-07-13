@@ -9,6 +9,7 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+include_once('LibCrypto.php');
 include_once('LibDatabase.php');
 include_once('LibDataManipulation.php');
 include_once('LibDate.php');
@@ -24,6 +25,7 @@ include_once('LibStats.php');
 include_once('LibString.php');
 include_once('LibUtility.php');
 
+$cr = new Crypto();
 $db = new Database();
 $dm = new DataManipulation();
 $date = new Date();

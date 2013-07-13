@@ -47,23 +47,59 @@ class DataManipulation {
 	}
 
 	/**
-	 * IsEmpty() will test if a variable is set. Will return true if variable is not set. Will return false if variable is set. 
+	 * IsEmpty() will test if a variable is set, empty string, or null. Will return true if variable is not set, is empty string, or null. Will return false if variable is set, non-empty string, or is not null. 
 	 * @param various $Variable Required. No default. Variable to test if set or not. 
-	 * @return boolean $IsEmpty. Will return true if variable is not set. Will return false if variable is set. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
+	 * @return boolean $IsEmpty. Will return true if variable is not set, is empty string, or null. Will return false if variable is set, non-empty string, or is not null. 
 	 */
-
-	public function IsEmpty($Variable) {
+	
+	public static function IsEmpty($Variable) {
 		if(!isset($Variable)) {
 			$IsEmpty = True;
-		} else{
+		} elseif(empty($Variable)) {
+			$IsEmpty = True;
+		} elseif(is_null($Variable)) {
+			$IsEmpty = True;
+		} else {
 			$IsEmpty = False;
 		}
 
 		return $IsEmpty;
+	}
+	
+	// public function IsEmpty($Variable) {
+	// 	if(!isset($Variable) or empty($Variable) or is_null($Variable)) {
+	// 		$IsEmpty = False;
+	// 	} elseif(isset($Variable) or !empty($Variable) or !is_null($Variable)) {
+	// 		$IsEmpty = True;
+	// 	}
+
+	// 	return $IsEmpty;
+	// }
+
+	// public function IsEmpty($Variable) {
+	// 	if(!isset($Variable)) {
+	// 		$IsEmpty = True;
+	// 	} else{
+	// 		$IsEmpty = False;
+	// 	}
+
+	// 	return $IsEmpty;
+	// }
+	
+	public function MakeEmpty($Variable) {
+		$MakeEmpty = '';
+		return $MakeEmpty;
+	}
+
+	public function MakeNull($Variable) {
+		$MakeNull = Null;
+		return $MakeNull;
+	}
+
+	public function MakeUnset($Variable) {
+		//$MakeUnset = unset($Variable);
+		unset($Variable);
+		//return $MakeUnset;
 	}
 
 	/**
@@ -145,10 +181,6 @@ class DataManipulation {
 	 * CObject() will type cast a given variable to a object state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a object state. 
 	 * @return object $CObject. Will return variable to an object state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CObject($Variable) {
@@ -160,15 +192,50 @@ class DataManipulation {
 	 * CArray() will type cast a given variable to a array state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a array state. 
 	 * @return array $CArray. Will return variable to an array state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CArray($Variable) {
 		$CArray = (array) $Variable;
 		return $CArray;
+	}
+
+	/**
+	 * SortArray() will sort a given array. Will reorder array and return True upon success, and False upon failure. 
+	 * @param array $Array Required. No default. The array to sort. 
+	 * @param text $Column Optional. Default is 'Key'. Acceptable options are 'Key', and 'Value'. Sort by value or key.
+	 * @param text $Order Optional. Default is 'Ascending'. Acceptable options are 'Ascending', and 'Descending'. Sort the array either ascending or descending. 
+	 * @param text $SortType Optional. Default is 'Regular'. Acceptable options are:
+	 * 'Regular' - Default. Compare items normally. Does not change types. Value is 0. 
+	 * 'Numeric' - Compare line items numerically. Value is 1.
+	 * 'String' - Compare items as strings. Value is 2. 
+	 * 'Natural' - Compare items as string, using natural ordering. Value is 3. 
+	 * @return array $SortArray. Will reorder array and return True upon success, and False upon failure.
+	 */
+
+	public function SortArray($Array, $Column = 'Key', $Order = 'Ascending', $SortType = 'Regular') {
+		if($SortType == 'Regular') {
+			$SortType = 0;
+		} elseif($SortType == 'Numeric') {
+			$SortType = 1;
+		} elseif($SortType == 'String') {
+			$SortType = 2;
+		} elseif($SortType == 'Natural') {
+			$SortType = 3;
+		} else {
+			$SortType = 0; /* Defaults to 'Regular' if can not determine $SortType. */
+		}
+
+		if($Column == 'Key' && $Order == 'Ascending') {
+			$SortArray = ksort($Array, $SortType);
+		} elseif($Column == 'Key' && $Order == 'Descending') {
+			$SortArray = krsort($Array, $SortType);
+		} elseif($Column == 'Value' && $Order == 'Ascending') {
+			$SortArray = asort($Array, $SortType);
+		} elseif($Column == 'Value' && $Order == 'Descending') {
+			$SortArray = arsort($Array, $SortType);
+		}
+
+		return $SortArray;
 	}
 }
 

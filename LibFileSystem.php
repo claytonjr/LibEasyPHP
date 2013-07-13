@@ -24,6 +24,18 @@ class FileSystem {
 	}
 
 	/**
+	 * The FileName() function returns the file name from a path. Alias of BaseName(). See also DirectoryName(). 
+	 * @param string $Path Required. No default. Specifies the path to check. 
+	 * @param string $Suffix Optional. No default. Specifies a file extension. If the file name has this file extension, the file extension will not show
+	 * @return string $FileName 
+	 */
+
+	public function FileName($Path, $Suffix) {
+		$FileName = basename($Path, $Suffix);
+		return $FileName;
+	}
+
+	/**
 	 * The ChangeGroup() function changes the user group of the specified file. Returns TRUE on success and FALSE on failure.
 	 * @param string $File Required. No default. Specifies the file to check. 
 	 * @param string $Group Required. No default. Specifies the new group. Can be a group name or a group ID. 
@@ -101,7 +113,7 @@ class FileSystem {
 	}
 
 	/**
-	 * The DirectoryName() function returns the directory name from a path.
+	 * The DirectoryName() function returns the directory name from a path. See also FileName().
 	 * @param string $Path Required. No default. Specifies the path to delete. 
 	 * @return string $DirectoryName 
 	 */
@@ -311,15 +323,13 @@ class FileSystem {
 	/**
 	 * The ReadFileIntoString() reads a file into a string. This function is the preferred way to read the contents of a file into a string. Because it will use memory mapping techniques, if this is supported by the server, to enhance performance. This function is binary-safe (meaning that both binary data, like images, and character data can be written with this function).
 	 * @param string $Path Required. No default. Specifies the open file to read. 
-	 * @param number $IncludePath Optional. Default is NULL. Set this parameter to '1' if you want to search for the file in the include_path (in php.ini) as well.
-	 * @param string $Context Optional. Default is NULL. Specifies the context of the file handle. Context is a set of options that can modify the behavior of a stream. Can be skipped by using NULL.
-	 * @param number $Start Optional. Specifies where in the file to start reading. This parameter was added in PHP 5.1. 
-	 * @param number $MaxLength Optional. Specifies how many bytes to read. This parameter was added in PHP 5.1.
 	 * @return array $ReadFileIntoString 
 	 */
 
-	public function ReadFileIntoString($Path, $IncludePath = Null, $Context = Null, $Start = Null, $MaxLength = Null) {
-		$ReadFileIntoString = file_get_contents($Path, $IncludePath, $Context, $Start, $MaxLength);
+	/* See above documentation and structure for previous design. */
+
+	public function ReadFileIntoString($Path) {
+		$ReadFileIntoString = file_get_contents($Path);
 		return $ReadFileIntoString;
 	}
 
