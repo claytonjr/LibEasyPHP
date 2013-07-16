@@ -19,29 +19,44 @@ class Html {
 	 */
 
 	public function PrintLine($Variable, $Mode = 'br') {
-		if($Mode == 'Break') {
-			$PrintLine = print($Variable . '<br />' . "\n");
-		} elseif($Mode == 'Paragraph') {
-			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
-		} elseif($Mode == 'br') {
-			$PrintLine = print($Variable . '<br />' . "\n");
-		} elseif($Mode == 'p') {
-			$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
-		} elseif($Mode == 'NewLine') {
-			$PrintLine = print($Variable . "\n");
-		} elseif($Mode == 'nl') {
-			$PrintLine = print($Variable . "\n");
-		} elseif($Mode == 'pre') {
-			$PrintLine = print('<pre>' . $Variable . '</pre>' . "\n");
+		if(is_array($Variable)) {
+			foreach($Variable As $Key => $Value) {
+				if($Mode == 'br') {
+					$PrintLine = print($Key . ' = ' . $Value . '<br />' . "\n");
+				} elseif($Mode == 'p') {
+					$PrintLine = print('<p>' . $Key . ' = ' . $Value . '</p>' . "\n");
+				} elseif($Mode == 'nl') {
+					$PrintLine = print($Key . ' = ' . $Value . "\n");
+				} elseif($Mode == 'pre') {
+					$PrintLine = print('<pre>' . $Key . ' = ' . $Value . '</pre>' . "\n");
+				} else {
+					$PrintLine = print($Key . ' = ' . $Value . '<br />' . "\n");
+				}
+			}
 		} else {
-			$PrintLine = print($Variable . '<br />' . "\n");
+			if($Mode == 'br') {
+				$PrintLine = print($Variable . '<br />' . "\n");
+			} elseif($Mode == 'p') {
+				$PrintLine = print('<p>' . $Variable . '</p>' . "\n");
+			} elseif($Mode == 'nl') {
+				$PrintLine = print($Variable . "\n");
+			} elseif($Mode == 'pre') {
+				$PrintLine = print('<pre>' . $Variable . '</pre>' . "\n");
+			} else {
+				$PrintLine = print($Variable . '<br />' . "\n");
+			}
 		}
-
 		return $PrintLine;
 	}
 
 	public function Pre($Text) {
-		$Pre = print('<pre>' . $Text . '</pre>' . "\n");
+		if(is_array($Text)) {
+			$Pre = print('<pre>');
+			$Pre .= print_r($Text);
+			$Pre .= print('</pre>');
+		} else {
+			$Pre = print('<pre>' . $Text . '</pre>' . "\n");
+		}		
 		return $Pre;
 	}
 }

@@ -52,7 +52,7 @@ class DataManipulation {
 	 * @return boolean $IsEmpty. Will return true if variable is not set, is empty string, or null. Will return false if variable is set, non-empty string, or is not null. 
 	 */
 	
-	public static function IsEmpty($Variable) {
+	public function IsEmpty($Variable) {
 		if(!isset($Variable)) {
 			$IsEmpty = True;
 		} elseif(empty($Variable)) {
@@ -214,28 +214,84 @@ class DataManipulation {
 
 	public function SortArray($Array, $Column = 'Key', $Order = 'Ascending', $SortType = 'Regular') {
 		if($SortType == 'Regular') {
-			$SortType = 0;
+			$SortType = SORT_REGULAR;
 		} elseif($SortType == 'Numeric') {
-			$SortType = 1;
+			$SortType = SORT_NUMERIC;
 		} elseif($SortType == 'String') {
-			$SortType = 2;
+			$SortType = SORT_STRING;
 		} elseif($SortType == 'Natural') {
-			$SortType = 3;
+			$SortType = SORT_NATURAL;
 		} else {
-			$SortType = 0; /* Defaults to 'Regular' if can not determine $SortType. */
+			$SortType = SORT_REGULAR; /* Defaults to 'Regular' if can not determine $SortType. */
 		}
 
 		if($Column == 'Key' && $Order == 'Ascending') {
 			$SortArray = ksort($Array, $SortType);
+			print('ksort was used!');
 		} elseif($Column == 'Key' && $Order == 'Descending') {
 			$SortArray = krsort($Array, $SortType);
+			print('krsort was used!');
 		} elseif($Column == 'Value' && $Order == 'Ascending') {
 			$SortArray = asort($Array, $SortType);
+			print('asort was used!');
 		} elseif($Column == 'Value' && $Order == 'Descending') {
 			$SortArray = arsort($Array, $SortType);
+			print('arsort was used!');
 		}
-
 		return $SortArray;
+	}
+
+	/**
+	 * IsNull() will check to see if the given variable is null. Will return True if null, False if not null. 
+	 * @param various $Variable Required. No default. Variable to be checked. 
+	 * @return boolean Will return True if null, False if not null.
+	 */
+
+	public function IsNull($Variable) {
+		if($this->IsEmpty($Variable) == True) {
+			return True;
+		} else {
+			return False;
+		}
+	}
+
+	/**
+	 * IsUnset() will check to see if the given variable is unset. Will return True if unset, False if not unset. 
+	 * @param various $Variable Required. No default. Variable to be checked. 
+	 * @return boolean Will return True if unset, False if not unset.
+	 */
+
+	public function IsUnset($Variable) {
+		if($this->IsEmpty($Variable)) {
+			return True;
+		} else {
+			return False;
+		}
+	}
+
+	public function SortArrayByKey($Array, $Order = 'Ascending') {
+		if($Order == 'Ascending') {
+			//$SortArrayByKey = ksort($Array);
+			return ksort($Array);
+		} elseif($Order == 'Descending') {
+			// $SortArrayByKey = krsort($Array);
+			return krsort($Array);
+		} else {
+			// $SortArrayByKey = ksort($Array);
+			return ksort($Array);
+		}
+		// return $SortArrayByKey;
+	}
+
+	public function SortArrayByValue($Array, $Order = 'Ascending') {
+		if($Order == 'Ascending') {
+			$SortArrayByValue = asort($Array);
+		} elseif($Order == 'Descending') {
+			$SortArrayByValue = arsort($Array);
+		} else {
+			$SortArrayByValue = asort($Array);
+		}
+		return $SortArrayByValue;
 	}
 }
 
