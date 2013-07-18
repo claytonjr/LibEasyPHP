@@ -120,6 +120,96 @@ class Financial {
 		$Apy = (pow((1 + $Rate / $Periods), $Periods) - 1);
 		return $Apy;
 	}
+
+	/**
+	 * RuleOf72() The Rule of 72 is a simple formula used to estimate the length of time required to double an investment. The rule of 72 is primarily used in off the cuff situations where an individual needs to make a quick calculation instead of working out the exact time it takes to double an investment. Also, one is more likely to remember the rule of 72 than the exact formula for doubling time or may not have access to a calculator that allows logarithms.
+	 *
+	 * Example of Rule of 72
+	 *
+	 * An individual is earning 6% on their money market account would like to estimate how long it would take to double their current balance. In order for this estimation to be remotely accurate, we must assume that there will be no withdrawals nor deposits into this account. We can estimate that it will take approximately 12 years to double the current balance after dividing 72 by 6.
+	 *
+	 * Alternative Formula for Rule of 72
+	 *
+	 * Alternatively, the rule of 72 can be applied to estimate the rate needed to double an investment within a specific time period. This alternative formula to the rule of 72 can be shown as (rate_to_double = 72 / T). T = Length of time. 
+	 *
+	 * If we take a look at the prior example of Rule of 72, we can apply the same example to an individual wanting to estimate what their rate needs to be in order to double their money within a specific period of time. If an individual wants to estimate the rate needed to double their money within 12 years, this can be estimated as 6% from dividing 72 by 12 years.
+	 *
+	 * Breakdowns of Rule of 72
+	 *
+	 * The rule of 72 is generally used for quick estimates in situations where the rate is in the several percent range. As the rate gets too low or too high below and above approximately 8%, the estimate becomes less accurate.
+	 *
+	 * Another issue with the rule of 72 is with large sums of money. If a company or individual has large sums involved, this doesn't necessarily affect the outcome of the formula, but the company or individual may choose to use the actual doubling time formula as each decision could affect their profitability on a larger scale.
+	 * @param number $Rate. Required. No default. Rate, expressed as a whole number. 
+	 * @return number $RuleOf72
+	 */
+
+	public function RuleOf72($Rate) {
+		$RuleOf72 = (72 / $Rate);
+		return $RuleOf72;
+	}
+
+	/**
+	 * Perpetuity() A perpetuity is a type of annuity that receives an infinite amount of periodic payments. An annuity is a financial instrument that pays consistent periodic payments. As with any annuity, the perpetuity value formula sums the present value of future cash flows. 
+	 * 
+	 * Common examples of when the perpetuity value formula is used is in consols issued in the UK and preferred stocks. Preferred stocks in most circumstances receive their dividends prior to any dividends paid to common stocks and the dividends tend to be fixed, and in turn, their value can be calculated using the perpetuity formula.
+	 *
+	 * The value of a perpetuity can change over time even though the payment remains the same. This occurs as the discount rate used may change. If the discount rate used lowers, the denominator of the formula lowers, and the value will increase.
+	 *
+	 * It should be noted that the formula shown supposes that the cash flows per period never change. 
+	 *
+	 * Example of Perpetuity Value Formula
+	 * 
+	 * An individual is offered a bond that pays coupon payments of $10 per year and continues for an infinite amount of time. Assuming a 5% discount rate, the formula would be written as (10.00 / 0.05) = 200
+	 *
+	 * After solving, the amount expected to pay for this perpetuity would be $200.
+	 * @param number $Rate Required. No default. Discount rate.
+	 * @param number $Periods Required. No default. Dividend, or coupon per period.
+	 * @return number $Perpetuity
+	 */
+
+	public function Perpetuity($Rate, $Periods) {
+		$Perpetuity = ($Periods / $Rate);
+		return $Perpetuity;
+	}
+
+	/**
+	 * PresentValueFactor() The formula for the present value factor is used to calculate the present value per dollar that is received in the future.
+	 *
+	 * The present value factor formula is based on the concept of time value of money. Time value of money is the idea that an amount received today is worth more than if the same amount was received at a future date. Any amount received today can be invested to earn additional monies.
+	 *
+	 * Use of the Present Value Factor Formula
+	 *
+	 * By calculating the current value today per dollar received at a future date, the formula for the present value factor could then be used to calculate an amount larger than a dollar. This can be done by multiplying the present value factor by the amount received at a future date.
+	 *
+	 * For example, if an individual is wanting to use the present value factor to calculate today's value of $500 received in 3 years based on a 10% rate, then the individual could multiply $500 times the present value factor of 3 years and 10%.
+	 *
+	 * The present value factor is usually found on a table that lists the factors based on the term ($Periods) and the rate ($Rate). Once the present value factor is found based on the term and rate, it can be multiplied by the dollar amount to find the present value. Using the formula on the prior example, the present value factor of 3 years and 10% is .751, so $500 times .751 equals $375.66.
+	 * @param number $Rate Required. No default. 
+	 * @param number $Periods Requird. No defaults. 
+	 * @return number $PresentValueFactor
+	 */
+
+	public function PresentValueFactor($Rate, $Periods) {
+		$PresentValueFactor = 1 / pow((1 + $Rate), $Periods);
+		return $PresentValueFactor;
+	}
+
+	/**
+	 * PresentValueContinuousCompounding()
+	 */
+
+	public function PresentValueContinuousCompounding($Rate, $Periods, $FutureValue) {
+		$PresentValueContinuousCompounding = $FutureValue * pow(2.718281828, -$Rate * $Periods);
+	}
+
+	/**
+	 * PresentValueOfGrowingAnnuity()
+	 */
+
+	public function PresentValueOfGrowingAnnuity($Rate, $Periods, $Payments, $RateOfGrowth) {
+		$PresentValueOfGrowingAnnuity = $Payments * (1 - pow(((1 + $RateOfGrowth) / (1 + $Rate)), $Periods)) / ($Rate - $RateOfGrowth);
+		return $PresentValueOfGrowingAnnuity;	
+	}
 }
 
 ?>
