@@ -10,7 +10,18 @@
  */
 
 class Graphics {
-	
+	public function GetInformation() {
+		$GetInformation = gd_info();
+		return $GetInformation;
+	}
+
+	public function GetSize($File) {
+		$GetGraphicSize = getimagesize($File);
+	}
+
+	public function AddWatermark($Watermark, $Image, $) {
+
+	}
 }
 
 ?>
