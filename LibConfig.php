@@ -25,6 +25,7 @@ include_once('LibSecurity.php');
 include_once('LibStats.php');
 include_once('LibString.php');
 include_once('LibUtility.php');
+// include_once('LibKIA.php');
 
 $cr = new Crypto();
 $db = new Database();
@@ -44,9 +45,31 @@ $str = new String();
 $util = new Utility();
 
 /**
+ * Determine base line compatibility. 
+ */
+
+if($util->PhpVersion() <= 5.1) {
+	$html->PrintLine('Your PHP install is not higher than version 5.1. Please upgrade to a newer version. Exiting...');
+	exit();
+}
+
+/**
  * DisplayErrors() True or False. Optional. Default is True. Will display errors when called. 
  */
 
 $util -> DisplayErrors('True');
+
+/**
+ * Set database authentication information.  
+ */
+
+$DbType = ''; /* MySQL, PgSQL, MsSQl, Oracle */
+$DbHost = ''; 
+$DbPort = '';
+$DbUser = '';
+$DbPassword = '';
+$DbOptions = '';
+$DbConnectTimeout = '';
+$DbName = '';
 
 ?>

@@ -27,7 +27,7 @@ class Graphics {
 	}
 
 	public function LineChart($Data, $Title, $Height = 240, $Width = 320) {
-		header("Content-type: image/png");
+		//header("Content-type: image/png");
 		$arrval = array(12,123,21,32,77,85,166,176,163,121);
 		//$Height = 260;
 		//$Width = 330;
@@ -67,6 +67,7 @@ class Graphics {
 		imageline($Image, 20, $Height - 49, $Width - 10, $Height - 49, $Black);
 		imagestring($Image, 3, 10, $Height - 20, $Title, $Red);
 		imagepng($Image);
+		imagedestroy($Image);
 	}
 
 	public function PieChart() {

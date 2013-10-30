@@ -12,6 +12,19 @@
 class Math {
   
 	/**
+	 * The Count() function will count all elements in an array, or something in an object.
+	 * @param array $Array Required. No default. 
+	 * @return number $Count 
+	 */
+
+	public function Count($Array) {
+		if(isset($Array)) {
+			$Count = count($Array);
+			return $Count;
+		}	
+	}
+
+	/**
 	 * The EuclideanDistance() function will give the distance between two x,y cords. Alias for Ed().
 	 * @param number $Cord_X_1 Required. No default. 
 	 * @param number $Cord_Y_1 Required. No default. 
@@ -20,8 +33,8 @@ class Math {
 	 * @return number $EuclideanDistance 
 	 */
 
-	function EuclideanDistance($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
-		$EuclideanDistance = SqRt(Square($Cord_X_1 - $Cord_X_2) + Square($Cord_Y_1 - $Cord_Y_2));
+	public function EuclideanDistance($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
+		$EuclideanDistance = $this->SqRt($this->Square($Cord_X_1 - $Cord_X_2) + $this->Square($Cord_Y_1 - $Cord_Y_2));
 		return $EuclideanDistance;
 	}
 
@@ -34,8 +47,8 @@ class Math {
 	 * @return number $EuclideanDistance 
 	 */
 
-	function Ed($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
-		$EuclideanDistance = SqRt(Square($Cord_X_1 - $Cord_X_2) + Square($Cord_Y_1 - $Cord_Y_2));
+	public function Ed($Cord_X_1, $Cord_Y_1, $Cord_X_2, $Cord_Y_2) {
+		$EuclideanDistance = $this->SqRt($this->Square($Cord_X_1 - $Cord_X_2) + $this->Square($Cord_Y_1 - $Cord_Y_2));
 		return $EuclideanDistance;
 	}
 
@@ -68,7 +81,7 @@ class Math {
 	 */
 
 
-	function Absolute($Number) {
+	public function Absolute($Number) {
 		$Absolute = abs($Number);
 		return $Absolute;
 	}
@@ -80,7 +93,7 @@ class Math {
 	 */
 
 
-	function Abs($Number) {
+	public function Abs($Number) {
 		$Abs = abs($Number);
 		return $Abs;
 	}
@@ -92,7 +105,7 @@ class Math {
 	 * @return number $Ceiling 
 	 */
 
-	function Ceil($Number) {
+	public function Ceil($Number) {
 		$Ceil = ceil($Number);
 		return $Ceil;
 	}
@@ -114,7 +127,7 @@ class Math {
 	 * @return number $Cos 
 	 */
 
-	function Cos($Number) {
+	public function Cos($Number) {
 		$Cos = cos($Number);
 		return $Cos;
 	}
@@ -125,7 +138,7 @@ class Math {
 	 * @return number $Floor 
 	 */
 
-	function Floor($Number) {
+	public function Floor($Number) {
 		$Floor = floor($Number);
 		return $Floor;
 	}
@@ -147,7 +160,7 @@ class Math {
 	 * @return boolean  
 	 */
 
-	function IsFinite($Number) {
+	public function IsFinite($Number) {
 		$IsFinite = is_finite($Number);
 		
 		if($IsFinite == 1) {
@@ -163,7 +176,7 @@ class Math {
 	 * @return boolean 
 	 */
 
-	function IsInfinite($Number) {
+	public function IsInfinite($Number) {
 		$IsInfinite = is_infinite($Number);
 
 		if($IsInfinite == 1) {
@@ -179,7 +192,7 @@ class Math {
 	 * @return boolean 
 	 */
 
-	function IsNaN($Number) {
+	public function IsNaN($Number) {
 		$IsNaN = is_nan($Number);
 
 		if($IsNaN == 1) {
@@ -196,7 +209,7 @@ class Math {
 	 * @return number $Log 
 	 */
 
-	function Log($Number, $Base) {
+	public function Log($Number, $Base) {
 		$Log = log($Number, $Base);
 		return $Log; 
 	}
@@ -208,7 +221,7 @@ class Math {
 	 * @return number $Max 
 	 */
 
-	function Max($Number_1, $Number_2) {
+	public function Max($Number_1, $Number_2) {
 		$Max = max($Number_1, $Number_2);
 		return $Max;
 	}
@@ -220,7 +233,7 @@ class Math {
 	 * @return number $Min 
 	 */
 
-	function Min($Number_1, $Number_2) {
+	public function Min($Number_1, $Number_2) {
 		$Min = min($Number_1, $Number_2);
 		return $Min;
 	}
@@ -230,7 +243,7 @@ class Math {
 	 * @return number $Pi 
 	 */
 
-	function Pi() {
+	public function Pi() {
 		$Pi = pi();
 		return $Pi;
 	}
@@ -242,7 +255,7 @@ class Math {
 	 * @return number $Power 
 	 */
 
-	function Power($Number_1, $Number_2) {
+	public function Power($Number_1, $Number_2) {
 		$Power = pow($Number_1, $Number_2);
 		return $Power;
 	}
@@ -254,7 +267,7 @@ class Math {
 	 * @return number $Power 
 	 */
 
-	function Pow($Number_1, $Number_2) {
+	public function Pow($Number_1, $Number_2) {
 		$Pow = pow($Number_1, $Number_2);
 		return $Pow;
 	}
@@ -266,7 +279,7 @@ class Math {
 	 * @return number $Random 
 	 */
 
-	function Random($Minimum, $Maximum) {
+	public function Random($Minimum, $Maximum) {
 		$Random = mt_rand($Minimum, $Maximum);
 		return $Random;
 	}
@@ -274,11 +287,11 @@ class Math {
 	/**
 	 * The Round() function rounds a number to the nearest integer.
 	 * @param number $Number Required. No default. The number to be rounded. 
-	 * @param number $Precision Optional. No default. The number of digits after the decimal point. 
+	 * @param number $Precision Optional. Default is 2. The number of digits after the decimal point. 
 	 * @return number $Round 
 	 */
 
-	function Round($Number, $Precision) {
+	public function Round($Number, $Precision = 2) {
 		$Round = round($Number, $Precision);
 		return $Round;
 	}
@@ -289,20 +302,31 @@ class Math {
 	 * @return number $Sin 
 	 */
 
-	function Sin($Number) {
+	public function Sin($Number) {
 		$Sin = sin($Number); 
 		return $Sin;
 	}
 
 	/**
-	 * The SqRt() function returns the square root of a number.
+	 * The SqRt() function returns the square root of a number. Alias of SquareRoot().
 	 * @param number $Number Required. No default. 
 	 * @return number $SqRt 
 	 */
 
-	function SqRt($Number) {
+	public function SqRt($Number) {
 		$SqRt = sqrt($Number);
 		return $SqRt;
+	}
+
+	/**
+	 * The SquareRoot() function returns the square root of a number. Alias if SqRt().
+	 * @param number $Number Required. No default. 
+	 * @return number $SquareRoot 
+	 */
+
+	public function SquareRoot($Number) {
+		$SquareRoot = sqrt($Number);
+		return $SquareRoot;
 	}
 
 	/**
@@ -311,7 +335,7 @@ class Math {
 	 * @return number $Tan 
 	 */
 
-	function Tan($Number) {
+	public function Tan($Number) {
 		$Tan = tan($Number);
 		return $Tan;
 	}

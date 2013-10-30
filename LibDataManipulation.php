@@ -256,6 +256,19 @@ class DataManipulation {
 	}
 
 	/**
+	 * The Count() function will count all elements in an array, or something in an object.
+	 * @param array $Array Required. No default. 
+	 * @return number $Count 
+	 */
+
+	public function Count($Array) {
+		if(isset($Array)) {
+			$Count = count($Array);
+			return $Count;
+		}	
+	}
+
+	/**
 	 * IsUnset() will check to see if the given variable is unset. Will return True if unset, False if not unset. 
 	 * @param various $Variable Required. No default. Variable to be checked. 
 	 * @return boolean Will return True if unset, False if not unset.

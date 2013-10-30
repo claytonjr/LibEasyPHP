@@ -11,6 +11,42 @@
 
 class Utility {
 
+  	public function Exit($Message = Null) {
+  		if($Message == Null) {
+  			$Exit = exit();
+  		} elseif(!$Message == Null) {
+  			$Exit = exit($Message);
+  		} else {
+  			$Exit = exit();
+  		}
+  		return $Exit;
+  	}
+
+  	/**
+	 * The NotFound() will return a 404 error. This function will only send the header. It will not display a 404 page, or like message.
+	 * @return None Will only return an 404 error to the client. 
+	 */
+
+  	public function NotFound() {
+  		header('HTTP/1.0 404 Not Found');
+  	}
+
+  	/**
+	 * The Redirect() function will redirect the client to a specified URL. 
+	 * @param string $Url Required. No default. URL for client to be directed to. 
+	 * @return None Will redirect client to a specified URL. 
+	 */
+
+  	public function Redirect($Url = Null) {
+  		$Redirect = header("Location: $Url"); 
+  		return $Redirect;
+  	}
+
+  	public function Header($Mode = Null) {
+  		$Header = Null;
+  		return $Header;
+  	}
+
   	public function Import($File) {
   		$Import = include_once($File);
   		return $Import;
@@ -100,7 +136,7 @@ class Utility {
 	    }
 	}
 
-	public function PHPVersion() {
+	public function PhpVersion() {
 		$PHPVersion = phpversion();
 		return $PHPVersion;
 	}

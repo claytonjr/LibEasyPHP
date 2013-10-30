@@ -13,12 +13,12 @@ class Html {
 
 	/**
 	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.
-	 * @param string $Variable Required. No default. The string to be displayed on output. 
+	 * @param string $Variable Optional. Default is null. The string to be displayed on output. 
 	 * @param string $Mode Optional. Default is 'br'. Options are 'br', 'p', 'pre', or 'nl'. 
 	 * @return string $PrintLine Returns newly formated string for HTML markup. 
 	 */
 
-	public function PrintLine($Variable, $Mode = 'br') {
+	public function PrintLine($Variable = Null, $Mode = 'br') {
 		if(is_array($Variable)) {
 			foreach($Variable As $Key => $Value) {
 				if($Mode == 'br') {
@@ -49,6 +49,11 @@ class Html {
 		return $PrintLine;
 	}
 
+	public function Td($TableData) {
+		$Td = print("<td>" . $TableData . "</td>");
+		return $Td;
+	}
+
 	public function Pre($Text) {
 		if(is_array($Text)) {
 			$Pre = print('<pre>');
@@ -58,6 +63,10 @@ class Html {
 			$Pre = print('<pre>' . $Text . '</pre>' . "\n");
 		}		
 		return $Pre;
+	}
+
+	public function Img($Source, $Height = Null, $Width = Null, $AltTitle = Null) {
+		$Img = print("<img src=\"" . $Source . "\">");
 	}
 }
 

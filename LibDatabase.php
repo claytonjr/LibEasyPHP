@@ -9,8 +9,57 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+/* Getting the database creds */
+include_once('LibConfig.php');
+
 class Database {
-	
+
+	public function Query($QueryString) {
+		if($DbType == 'PgSQL') {
+			$DatabaseConnectionString = "host=$DbHost port=$DbPort dbname=$DbName user=$DbUser password=$DbPassword";
+
+			$DatabaseConnection = pg_connect($DatabaseConnectionString);
+
+			if(!$DatabaseConnection) {
+				print('Error: Could not connect to database.');
+				exit();
+			}
+
+			$QueryResult = pg_query($DatabaseConnection, $QueryString);
+
+			if(!$QueryResult) {
+				print('Error: Could not create query result.');
+				exit();
+			}
+
+			$QueryResultSet = pg_fetch_all($QueryResult);
+			
+			//return $RowItem;
+		} elseif($DbType == 'MySQL') {
+			$DatabaseConnection = Null;
+
+			$DatabaseConnection = mysql_connect($DbHost, $DbUser, $DbPassword);
+
+
+			if(!$DatabaseConnection) {
+				print('Error: Could not connect to database.');
+				exit();
+			}
+			
+			mysql_select_db($DbName, $DatabaseConnection);
+			
+			$QueryResult = mysql_query($QueryString);
+
+			$QueryResultSet = mysql_fetch_assoc($QueryResult);
+
+		} elseif($DbType == 'MsSQL') {
+
+		} elseif($DbType == 'Oracle') {
+
+		}
+		
+		return $QueryResultSet;
+	}
 }
 
 ?>
