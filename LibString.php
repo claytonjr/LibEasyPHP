@@ -10,7 +10,6 @@
  */
 
 class String {
-
     /**
      * InStr() returns a number specifying the position of the first occurrence of one string within another. 
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
@@ -160,11 +159,6 @@ class String {
      * @param string $String Required. No default. String displayed 
      * @param string $Format Optional. Default is PCase. Options are UCase, LCase, or PCase. Please see LCase(), UCase(), and PCase() for more details.  
      * @return string
-     * 
-     * <code>
-     *  echo(FormatString('Hello, World!', 'LCase')); 
-     *  Will return 'hello, world!'
-     * </code>
      */
 
     public function FormatString($String, $Format = 'PCase') {
@@ -219,6 +213,35 @@ class String {
         return $Money;
     }
 
+    public function CharacterCount($String) {
+        $CharacterCount = strlen($String);
+        return $CharacterCount;
+    }
+
+    public function WordCount($String) {
+        $WordCount = str_word_count($String);
+        return $WordCount;
+    }
+
+    public function Rot13($String) {
+        $Rot13 = str_rot13($String);
+        return $Rot13;
+    }
+
+    public function Replace($SearchFor, $ReplaceWith, $String) {
+        $Replace = str_replace($SearchFor, $ReplaceWith, $String);
+        return $Replace;
+    }
+
+    public function StringShuffle($String) {
+        $StringShuffle = str_shuffle($String);
+        return $StringShuffle;
+    }
+
+    public function Shuffle($String) {
+        $StringShuffle = str_shuffle($String);
+        return $StringShuffle;
+    }
 }
 
 ?>

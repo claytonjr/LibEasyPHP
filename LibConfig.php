@@ -24,8 +24,8 @@ include_once('LibScience.php');
 include_once('LibSecurity.php');
 include_once('LibStats.php');
 include_once('LibString.php');
+include_once('LibSystem.php');
 include_once('LibUtility.php');
-// include_once('LibKIA.php');
 
 $cr = new Crypto();
 $db = new Database();
@@ -42,22 +42,30 @@ $sci = new Science();
 $sec = new Security();
 $stat = new Stats();
 $str = new String();
+$sys = new System();
 $util = new Utility();
+
+$LibVersion = '0.0.1';
+
+/**
+ * DisplayErrors() True or False. Optional. Default is False. Will display errors, if true, when called. 
+ */
+
+$util->DisplayErrors(True);
 
 /**
  * Determine base line compatibility. 
  */
 
-if($util->PhpVersion() <= 5.1) {
-	$html->PrintLine('Your PHP install is not higher than version 5.1. Please upgrade to a newer version. Exiting...');
-	exit();
+$CurrentPhpVersion = $util->PhpVersion();
+$BasePhpVersion = '5.2.17';
+$EnforceBaseCompatibility = True; /* True or False */
+
+if($EnforceBaseCompatibility == True) {
+	if($CurrentPhpVersion < $BasePhpVersion) {
+		$util->Kill("Your current PHP install is $CurrentPhpVersion and it needs to be higher than $BasePhpVersion. Exiting...");
+	}
 }
-
-/**
- * DisplayErrors() True or False. Optional. Default is True. Will display errors when called. 
- */
-
-$util -> DisplayErrors('True');
 
 /**
  * Set database authentication information.  

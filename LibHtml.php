@@ -11,6 +11,61 @@
 
 class Html {
 
+	public function ArrayToHtml($Array, $HtmlTable = True) {
+	    $HtmlOut = '';
+	    foreach ($Array as $Key => $Value) {
+	        if(is_array($Value)) {
+	            if(!isset($HtmlTableHeader)) {
+	            	$HtmlTableHeader = (
+	            		'<th>' .
+	            		implode('</th><th>', array_keys($Value)) .
+	            		'</th>'
+	            	);
+	            }
+
+	            array_keys($Value);
+	            $HtmlOut .= '<tr>';
+	            $HtmlOut .= $this->ArrayToHtml($Value, False);
+	            $HtmlOut .= '</tr>';
+	        } else {
+	            $HtmlOut .= "<td>$Value</td>";
+	        }
+	    }
+
+	    if ($HtmlTable) {
+	        return '<table>' . $HtmlTableHeader . $HtmlOut . '</table>';
+	    } else {
+	        return $HtmlOut;
+	    }
+	}
+
+// 	function array2Html($array, $table = true)
+// {
+//     $out = '';
+//     foreach ($array as $key => $value) {
+//         if (is_array($value)) {
+//             if (!isset($tableHeader)) {
+//                 $tableHeader =
+//                     '<th>' .
+//                     implode('</th><th>', array_keys($value)) .
+//                     '</th>';
+//             }
+//             array_keys($value);
+//             $out .= '<tr>';
+//             $out .= $this->array2Html($value, false);
+//             $out .= '</tr>';
+//         } else {
+//             $out .= "<td>$value</td>";
+//         }
+//     }
+
+//     if ($table) {
+//         return '<table>' . $tableHeader . $out . '</table>';
+//     } else {
+//         return $out;
+//     }
+// }
+
 	/**
 	 * PrintLine() will print a line in HTML. Depending on $Mode, will wrap in P or end with BR.
 	 * @param string $Variable Optional. Default is null. The string to be displayed on output. 

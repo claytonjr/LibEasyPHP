@@ -16,10 +16,6 @@ class DataManipulation {
 	 * @param various $Variable Required. No default. Variable to typecast. 
 	 * @param string $DataType Optional. Default is String. Options are String, Integer, Boolean, Float, Object, Array, Binary, and Unset.  
 	 * @return various $TypeCast
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function TypeCast($Variable, $DataType = 'String') {
@@ -66,26 +62,6 @@ class DataManipulation {
 		return $IsEmpty;
 	}
 	
-	// public function IsEmpty($Variable) {
-	// 	if(!isset($Variable) or empty($Variable) or is_null($Variable)) {
-	// 		$IsEmpty = False;
-	// 	} elseif(isset($Variable) or !empty($Variable) or !is_null($Variable)) {
-	// 		$IsEmpty = True;
-	// 	}
-
-	// 	return $IsEmpty;
-	// }
-
-	// public function IsEmpty($Variable) {
-	// 	if(!isset($Variable)) {
-	// 		$IsEmpty = True;
-	// 	} else{
-	// 		$IsEmpty = False;
-	// 	}
-
-	// 	return $IsEmpty;
-	// }
-	
 	public function MakeEmpty($Variable) {
 		$MakeEmpty = '';
 		return $MakeEmpty;
@@ -106,10 +82,6 @@ class DataManipulation {
 	 * CBoolean() will type cast a given variable to a boolean state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a boolean state. 
 	 * @return boolean $CBoolean. Will return variable to an boolean state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CBoolean($Variable) {
@@ -121,10 +93,6 @@ class DataManipulation {
 	 * CString() will type cast a given variable to a string state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a string state. 
 	 * @return string $CString. Will return variable to an string state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CString($Variable) {
@@ -136,10 +104,6 @@ class DataManipulation {
 	 * CInteger() will type cast a given variable to a integer state. Alias of CInt().
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
 	 * @return integer $CInteger. Will return variable to an integer state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CInteger($Variable) {
@@ -151,10 +115,6 @@ class DataManipulation {
 	 * CInt() will type cast a given variable to a integer state. Alias of CInteger().
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a integer state. 
 	 * @return integer $CInteger. Will return variable to an integer state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CInt($Variable) {
@@ -166,10 +126,6 @@ class DataManipulation {
 	 * CFloat() will type cast a given variable to a float state. 
 	 * @param various $Variable Required. No default. Variable to be to be type cast to a float state. 
 	 * @return float $CFloat. Will return variable to an float state. 
-	 * 
-	 * <code>
-	 *  
-	 * </code>
 	 */
 
 	public function CFloat($Variable) {
@@ -227,16 +183,12 @@ class DataManipulation {
 
 		if($Column == 'Key' && $Order == 'Ascending') {
 			$SortArray = ksort($Array, $SortType);
-			print('ksort was used!');
 		} elseif($Column == 'Key' && $Order == 'Descending') {
 			$SortArray = krsort($Array, $SortType);
-			print('krsort was used!');
 		} elseif($Column == 'Value' && $Order == 'Ascending') {
 			$SortArray = asort($Array, $SortType);
-			print('asort was used!');
 		} elseif($Column == 'Value' && $Order == 'Descending') {
 			$SortArray = arsort($Array, $SortType);
-			print('arsort was used!');
 		}
 		return $SortArray;
 	}
@@ -284,16 +236,12 @@ class DataManipulation {
 
 	public function SortArrayByKey($Array, $Order = 'Ascending') {
 		if($Order == 'Ascending') {
-			//$SortArrayByKey = ksort($Array);
 			return ksort($Array);
 		} elseif($Order == 'Descending') {
-			// $SortArrayByKey = krsort($Array);
 			return krsort($Array);
 		} else {
-			// $SortArrayByKey = ksort($Array);
 			return ksort($Array);
 		}
-		// return $SortArrayByKey;
 	}
 
 	public function SortArrayByValue($Array, $Order = 'Ascending') {
