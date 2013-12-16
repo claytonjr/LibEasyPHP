@@ -50,7 +50,7 @@ class Utility {
   	}
 
   	public function Header($Mode = Null) {
-  		$Header = Null;
+  		$Header = header($Mode);
   		return $Header;
   	}
 
@@ -169,11 +169,20 @@ class Utility {
 
 	public function DisplayErrors($Boolean = False) {
 		if($Boolean == True) {
-			$this -> SetIni('display_errors', '1');
+			$this->SetIni('display_errors', '1');
+			$this->SetIni('xdebug.default_enable', '1');
+			$this->SetIni('xdebug.default_enable', 'on');
+			xdebug_enable();
 		} elseif($Boolean == False) {
-			$this -> SetIni('display_errors', '0');
+			$this->SetIni('display_errors', '0');
+			$this->SetIni('xdebug.default_enable', '0');
+			$this->SetIni('xdebug.default_enable', 'off');
+			xdebug_disable();
 		} else {
 			$this -> SetIni('display_errors', '0');
+			xdebug_disable();
+			$this->SetIni('xdebug.default_enable', '0');
+			$this->SetIni('xdebug.default_enable', 'off');
 		}
 	}
 

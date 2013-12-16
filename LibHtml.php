@@ -11,7 +11,7 @@
 
 class Html {
 
-	public function ArrayToHtml($Array, $HtmlTable = True) {
+	public function ArrayToHtml($Array, $HtmlTable = True, $HtmlTableHeader = Null) {
 	    $HtmlOut = '';
 	    foreach ($Array as $Key => $Value) {
 	        if(is_array($Value)) {
@@ -122,6 +122,12 @@ class Html {
 
 	public function Img($Source, $Height = Null, $Width = Null, $AltTitle = Null) {
 		$Img = print("<img src=\"" . $Source . "\">");
+		return $Img;
+	}
+
+	public function Href($Url, $Text, $Title = Null, $Target = '_parent') {
+		$Href = "<a href=\"" . $Url . "\" title=\"" . $Title . "\" target=\"" . $Target ."\">" . $Text . "</a>";
+		return $Href;  
 	}
 }
 

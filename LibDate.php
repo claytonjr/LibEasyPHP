@@ -11,6 +11,16 @@
 
 class Date {
     
+    public function Format($Date, $DateFormat = 'yyyy-mm-dd') {
+        if($DateFormat == 'yyyy-mm-dd') {
+            $Format = date('Y-m-d', strtotime($Date));
+        } else {
+            $Format = date('Y-m-d', strtotime($Date));
+        } 
+
+        return $Format;
+    }
+
     /**
      * DateDiff() will return the difference between two dates in days. 
      * @param date $StartDate Required. No default. 
@@ -30,13 +40,19 @@ class Date {
         $DateDiffTS = $EndDateTS - $StartDateTS;
         
         if($DateFormat == 'Days') {
-            $DateDiff = round($DateDiffTS / 86400);
+            $DateDiff = round($DateDiffTS / 86400, 5);
         } elseif($DateFormat == 'Months') {
-            $DateDiff = round(($DateDiffTS / 86400) / 30);
+            $DateDiff = round(($DateDiffTS / 86400) / 30, 5);
         } elseif($DateFormat == 'Years') {
-            $DateDiff = round(($DateDiffTS / 86400) / 365);
+            $DateDiff = round(($DateDiffTS / 86400) / 365, 5);
+        } elseif($DateFormat == 'Hours') {
+            $DateDiff = round(($DateDiffTS / 3600), 5);
+        } elseif($DateFormat == 'Minutes') {
+            $DateDiff = round(($DateDiffTS / 60), 5);
+        } elseif($DateFormat == 'Seconds') {
+            $DateDiff = $DateDiffTS;
         } else {
-            $DateDiff = round($DateDiffTS / 86400);
+            $DateDiff = round($DateDiffTS / 86400, 5);
         }
 
         return $DateDiff;
@@ -78,6 +94,18 @@ class Date {
     public function Now() {
         $Now = date("Y-m-d H:i:s");
         return $Now;
+    }
+
+    public function DateFormat($Date, $DateFormat = 'Long') {
+        if($DateFormat == 'Short') {
+            $DateFormatOut = date("Y-m-d", $Date);
+        } elseif($DateFormat =
+             'Long') {
+            $DateFormatOut = date("Y-m-d H:i:s", $Date);
+        } else {
+            $DateFormatOut = date("Y-m-d H:i:s", $Date);
+        }
+        return $DateFormatOut;
     }
 
 }

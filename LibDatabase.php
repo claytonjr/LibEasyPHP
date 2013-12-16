@@ -9,12 +9,12 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
-/* Getting the database creds */
-include_once('LibConfig.php');
-
 class Database {
-
+	
 	public function Query($QueryString) {
+
+		include('LibConfig.php');
+
 		if($DbType == 'PgSQL') {
 			$DatabaseConnectionString = "host=$DbHost port=$DbPort dbname=$DbName user=$DbUser password=$DbPassword";
 

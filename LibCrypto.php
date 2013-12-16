@@ -29,7 +29,12 @@ class Crypto {
 	public function Md5($String, $Raw = False) {
 		$Md5 = md5($String, $Raw);
 		return $Md5;
-	}	
+	}
+
+	public function Rot13($String) {
+        $Rot13 = str_rot13($String);
+        return $Rot13;
+    }	
 
 	public function ShowAlgorithms() {
 		$ShowHashAlgorithms = hash_algos();

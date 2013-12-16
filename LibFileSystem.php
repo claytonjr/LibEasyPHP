@@ -391,6 +391,16 @@ class FileSystem {
 		$WriteDataToFile = file_put_contents($Path, $Data, $Mode, $Context);
 		return $WriteDataToFile;
 	}
+
+	public function FileChangeTime($File) {
+		$FileChangeTime = filectime($File);
+		return $FileChangeTime;
+	}
+
+	public function FileModificationTime($File) {
+		$FileModificationTime = filemtime($File);
+		return $FileModificationTime;
+	}
 }
 
 ?>

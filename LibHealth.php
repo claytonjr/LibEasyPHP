@@ -11,6 +11,36 @@
 
 class Health {
 
+	public function BodyFatPercentage($Gender, $Weight, $Waist, $Hips, $Forearm, $Wrist) {
+		if($Gender == 'Female' or $Gender == 'F' or $Gender == 2) {
+			$Factor_1 = ($Weight * 0.732) + 8.897;
+			$Factor_2 = $Wrist / 3.140;
+			$Factor_3 = $Waist * 0.157;
+			$Factor_4 = $Hips * 0.249;
+			$Factor_5 = $Forearm * 0.434;
+			$LeanBodyMass = ((($Factor_1 + $Factor_2) - $Factor_3 ) - $Factor_4) + $Factor_5;
+			$BodyFatWeight = $Weight - $LeanBodyMass;
+			$BodyFatPercentage = ($BodyFatWeight * 100) / $Weight;
+		} elseif($Gender == 'Male' or $Gender == 'M' or $Gender == 1) {
+			$Factor_1 = ($Weight * 1.082) + 94.42;
+			$Factor_2 = $Waist * 4.15;
+			$LeanBodyMass = $Factor_1 - $Factor_2;
+			$BodyFatWeight = $Weight - $LeanBodyMass;
+			$BodyFatPercentage = ($BodyFatWeight * 100) / $Weight;
+		} else {
+			exit('Gender could not be determined. Exiting...');
+		}
+		
+		$Return = array(
+			'body_fat_percentage' => $BodyFatPercentage,
+			'lean_body_weight' => $LeanBodyMass,
+			'body_fat_weight' => $BodyFatWeight,
+			'body_lean_weight' => $LeanBodyMass
+		);
+
+		return $Return;
+	}
+
 	public function PoundsLost($CaloriesBurned) {
 		$PoundsLost = $CaloriesBurned / 3500;
 		return $PoundsLost;

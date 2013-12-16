@@ -15,22 +15,22 @@ class String {
      * @param string $String Required. No default. String expression from which the characters are returned. If string contains null, null is returned.
      * @param string $Match Required. No default. String expression sought.
      * @param number $Start Optional. Default is 0. Starting position of the search. 
-     * @param string $Direction Optional. Default is 'Forward'. Direction which search is performed. Options are 'Forward', 'Reverse', 'F', or 'R'.
-     * @param boolean $Case Optional. Default is 'False'. Options are 'False', 'True', 'F', or 'T'
+     * @param string $Direction Optional. Default is 'Forward'. Direction which search is performed. Options are 'Forward', or 'Reverse'.
+     * @param boolean $Case Optional. Default is False. Options are False, or True
      * @return number $InStr
      */
 
-    public function InStr($String, $Match, $Start = 0, $Direction = 'Forward', $Case = 'False') {
-        if($Direction == 'Forward' or $Direction == 'F') {
-            if($Case == 'False' or $Case == 'F') {
+    public function InStr($String, $Match, $Start = 0, $Direction = 'Forward', $Case = False) {
+        if($Direction == 'Forward') {
+            if($Case == False) {
                 $InStr = stripos($String, $Match, $Start);
-            } elseif($Case == 'True' or $Case == 'T') {
+            } elseif($Case == True) {
                 $InStr = strpos($String, $Match, $Start);
             } 
-        } elseif($Direction == 'Reverse' or $Direction == 'R') {
-            if($Case == 'False' or $Case == 'F') {
+        } elseif($Direction == 'Reverse') {
+            if($Case == False) {
                 $InStr = strripos($String, $Match, $Start);
-            } elseif($Case == 'True' or $Case == 'T') {
+            } elseif($Case == True) {
                 $InStr = strrpos($String, $Match, $Start);
             }
         }
@@ -38,11 +38,11 @@ class String {
         return $InStr;
     } 
 
-    public function InStrFwd($String, $Match, $Start = 0, $Case = 'False') {
-        if($Case == 'False' or $Case == 'F') {
+    public function InStrFwd($String, $Match, $Start = 0, $Case = False) {
+        if($Case == False) {
             $InStrFwd = stripos($String, $Match, $Start);
             $Success = True;
-        } elseif($Case == 'True' or $Case == 'T') {
+        } elseif($Case == True) {
             $InStrFwd = strpos($String, $Match, $Start);
             $Success = True;
         } else {
@@ -56,11 +56,11 @@ class String {
         );
     }
 
-    public function InStrRev($String, $Match, $Start = -1, $Case = 'False') {
-        if($Case == 'False' or $Case == 'F') {
+    public function InStrRev($String, $Match, $Start = -1, $Case = False) {
+        if($Case == False) {
             $InStrRev = strripos($String, $Match, $Start);
             $Success = True; 
-        } elseif($Case == 'True' or 'T') {
+        } elseif($Case == True) {
             $InStrRev = strrpos($String, $Match, $Start);
             $Success = True;
         } else {

@@ -10,8 +10,32 @@
  */
 
 class DataManipulation {
+	
+	public function IsNumeric($Variable) {
+		$IsNumeric = is_numeric($Variable);
+		return $IsNumeric;
+	}
 
-  /**
+	public function JsonDecode($Variable, $Array = True) {
+		if($Array == True) {
+			$JsonDecode = json_decode($Variable, True);
+		} else {
+			$JsonDecode = json_decode($Variable);
+		}				
+		return $JsonDecode;
+	}
+
+	public function JsonEncode($Variable, $PrettyPrint = False) {
+		if($PrettyPrint == True) {
+			$JsonEncode = json_encode($Variable, JSON_PRETTY_PRINT);
+		} else {
+			$JsonEncode = json_encode($Variable);
+		}
+		
+		return $JsonEncode;
+	}
+
+	/**
 	 * TypeCast() will take various forms of a variable, and type cast to another type. 
 	 * @param various $Variable Required. No default. Variable to typecast. 
 	 * @param string $DataType Optional. Default is String. Options are String, Integer, Boolean, Float, Object, Array, Binary, and Unset.  
@@ -49,9 +73,9 @@ class DataManipulation {
 	 */
 	
 	public function IsEmpty($Variable) {
-		if(!isset($Variable)) {
+		if(empty($Variable)) {
 			$IsEmpty = True;
-		} elseif(empty($Variable)) {
+		} elseif(!isset($Variable)) {
 			$IsEmpty = True;
 		} elseif(is_null($Variable)) {
 			$IsEmpty = True;
@@ -61,7 +85,7 @@ class DataManipulation {
 
 		return $IsEmpty;
 	}
-	
+
 	public function MakeEmpty($Variable) {
 		$MakeEmpty = '';
 		return $MakeEmpty;
@@ -253,6 +277,16 @@ class DataManipulation {
 			$SortArrayByValue = asort($Array);
 		}
 		return $SortArrayByValue;
+	}
+
+	public function StringToArray($String, $Delimiter = ', ') {
+		$StringToArray = explode($Delimiter, $String);
+		return $StringToArray;
+	}
+
+	public function ArrayToString($Array, $Delimiter = ', ') {
+		$ArrayToString = implode($Delimiter, $Array);
+		return $ArrayToString;
 	}
 }
 

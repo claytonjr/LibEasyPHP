@@ -11,6 +11,11 @@
 
 class Math {
   
+	public function IsNumeric($Variable) {
+		$IsNumeric = is_numeric($Variable);
+		return $IsNumeric;
+	}
+
 	/**
 	 * The Count() function will count all elements in an array, or something in an object.
 	 * @param array $Array Required. No default. 

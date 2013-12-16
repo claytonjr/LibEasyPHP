@@ -58,14 +58,16 @@ $util->DisplayErrors(True);
  */
 
 $CurrentPhpVersion = $util->PhpVersion();
-$BasePhpVersion = '5.2.17';
+$BasePhpVersion = '5.4.15';
 $EnforceBaseCompatibility = True; /* True or False */
 
 if($EnforceBaseCompatibility == True) {
 	if($CurrentPhpVersion < $BasePhpVersion) {
-		$util->Kill("Your current PHP install is $CurrentPhpVersion and it needs to be higher than $BasePhpVersion. Exiting...");
+		$util->Kill("Your current PHP install is $CurrentPhpVersion and it needs to be equal to or higher than $BasePhpVersion. Exiting...");
 	}
 }
+
+$util->SetIni('date.timezone', 'America/New_York');
 
 /**
  * Set database authentication information.  
