@@ -193,8 +193,9 @@ class String {
      */
 
     public function PCase($String) {
-        $String = ucwords($String);
-        return $String;
+        $PCase = strtolower($String);
+        $PCase = ucwords($PCase);
+        return $PCase;
     }
 
     /**

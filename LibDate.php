@@ -9,15 +9,51 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+/**
+ * 2013-06-01 Initial file creation. -JRC
+ * 2014-01-27 Added extra documentation. -JRC
+ * 2014-01-30 Clean up the file, et al. -JRC
+ * 2014-01-31 Added DatePart. -JRC
+ */
+
 class Date {
+
+    /**
+     * The DatePart() function returns a portion of the date, based upon the request of the $Mask.   
+     * @param Date $Date Required. The date to be filtered. 
+     * @param String $Mask Required. The options are Year, Month, Day, Hour, Minute, Second. 
+     * @return Date $DatePart Returns a portion of the date, based upon the request of the $Mask.
+     */
     
+    public function DatePart($Date, $Mask) {
+        if(strtolower($Mask) == 'year') {
+            $DatePart = date('Y', strtotime($Date));
+        } elseif(strtolower($Mask) == 'month') {
+            $DatePart = date('m', strtotime($Date));
+        } elseif(strtolower($Mask) == 'day') {
+            $DatePart = date('d', strtotime($Date));
+        } elseif(strtolower($Mask) == 'hour') {
+            $DatePart = date('H', strtotime($Date));
+        } elseif(strtolower($Mask) == 'minute') {
+            $DatePart = date('i', strtotime($Date));
+        } elseif(strtolower($Mask) == 'second') {
+            $DatePart = date('s', strtotime($Date));
+        } else {
+            die('Error: Cound not determine the value of $Mask');
+        }
+        return $DatePart;
+    }
+
     public function Format($Date, $DateFormat = 'yyyy-mm-dd') {
         if($DateFormat == 'yyyy-mm-dd') {
             $Format = date('Y-m-d', strtotime($Date));
+        } elseif($DateFormat == 'Short') {
+            $Format = date("Y-m-d");
+        } elseif($DateFormat == 'Now') {
+            $Format = date("Y-m-d H:i:s");
         } else {
             $Format = date('Y-m-d', strtotime($Date));
         } 
-
         return $Format;
     }
 
@@ -27,11 +63,6 @@ class Date {
      * @param date $EndDate Required. No default. 
      * @param string $DateFormat Optional. Default is Days. Acceptable input is Days, Months, and Years. 
      * @return number
-     * 
-     * <code>
-     *  echo(DateDiff('2013-05-31', '2013-06-01'));
-     *  Will return 1
-     * </code>
      */
 
     public function DateDiff($StartDate, $EndDate, $DateFormat = 'Days') {
@@ -54,7 +85,6 @@ class Date {
         } else {
             $DateDiff = round($DateDiffTS / 86400, 5);
         }
-
         return $DateDiff;
     }
 
@@ -62,11 +92,6 @@ class Date {
      * Today() will print the current date, in a few formats. 
      * @param date $DateFormat Optional. Default is Short. Acceptable input is Long, Short, and Now. 
      * @return date
-     * 
-     * <code>
-     *  echo(Today('Short'));
-     *  Will return 2013-06-03. 
-     * </code>
      */
 
     public function Today($DateFormat = 'Short') {
@@ -77,18 +102,12 @@ class Date {
         } elseif($DateFormat == 'Now') {
             $Today = date("Y-m-d H:i:s");
         }
-
         return $Today;
     }
 
     /**
      * Now() will print the current date and time. It is tne same as Today('Now');
      * @return date $Now 
-     * 
-     * <code>
-     *  echo(Now());
-     *  Will return 2013-06-04 01:08:15. 
-     * </code>
      */
 
     public function Now() {
@@ -99,8 +118,7 @@ class Date {
     public function DateFormat($Date, $DateFormat = 'Long') {
         if($DateFormat == 'Short') {
             $DateFormatOut = date("Y-m-d", $Date);
-        } elseif($DateFormat =
-             'Long') {
+        } elseif($DateFormat == 'Long') {
             $DateFormatOut = date("Y-m-d H:i:s", $Date);
         } else {
             $DateFormatOut = date("Y-m-d H:i:s", $Date);

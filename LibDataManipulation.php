@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LibDataManipulation - A library of functions for working with data. 
+ * LibDataManipulation - A library of functions for working with data and data structures. 
  * @author James Clayton <james.r.clayton@gmail.com>
  * @version 0.0.1
  * @copyright (c) 2013, James Clayton
@@ -9,12 +9,74 @@
  * @license http://opensource.org/licenses/ISC ISC License (ISC)
  */
 
+/**
+ * 2013-06-01 Initial file creation. -JRC
+ * 2014-01-27 Added extra documentation. -JRC
+ * 2014-01-28 Clean up the file, et al. -JRC
+ */
+
 class DataManipulation {
+
+	/**
+	 * SortArray() will sort a given array. 
+	 * @param array $Array Required. No default. The array to sort. 
+	 * @param text $Column Optional. Default is 'Key'. Acceptable options are 'Key', and 'Value'. Sort by value or key.
+	 * @param text $Order Optional. Default is 'Ascending'. Acceptable options are 'Ascending', and 'Descending'. Sort the array either ascending or descending. 
+	 * @return array $SortArray. Will reorder array and return upon success, and False upon failure.
+	 */
+
+	public function SortArray($Array, $Column = 'Key', $Order = 'Ascending') {
+		if(strtolower($Column) == 'key' && strtolower($Order) == 'ascending') {
+			$SortArray = ksort($Array);
+		} elseif(strtolower($Column) == 'key' && strtolower($Order) == 'descending') {
+			$SortArray = krsort($Array);
+		} elseif(strtolower($Column) == 'value' && strtolower($Order) == 'ascending') {
+			$SortArray = asort($Array);
+		} elseif(strtolower($Column) == 'value' && strtolower($Order) == 'descending') {
+			$SortArray = arsort($Array);
+		} else {
+			die('SortArray can not determine the value of input. Exiting...');
+		}
+		return $SortArray;
+	}
+
+	// public function SortArray(&$Array, $Key) {
+	// 	$Sort = array();
+	// 	$Return = array();
+	// 	reset($Array);
+		
+	// 	foreach ($Array as $i => $v) {
+ //        	$Sort[$i] = $v[$key];
+ //    	}
+	    
+	//     asort($Sort);
+	    
+	//     foreach ($Sort as $i => $v) {
+	//         $Return[$i] = $Array[$i];
+	//     }
+	    
+	//     $Array = $Return;
+
+	//     return 
+	// }
 	
+	/**
+	 * The IsNumeric() finds whether the given variable is numeric. Numeric strings consist of optional sign, any number of digits, optional decimal part and optional exponential part. Thus +0123.45e6 is a valid numeric value. Hexadecimal notation (0xFF) is allowed too but only without sign, decimal and exponential part. 
+	 * @param various $Variable Required. No default. The variable being evaluated. 
+	 * @return boolean $IsNumeric Returns TRUE if $Variable is a number or a numeric string, FALSE otherwise. 
+	 */
+
 	public function IsNumeric($Variable) {
 		$IsNumeric = is_numeric($Variable);
 		return $IsNumeric;
 	}
+
+	/**
+	 * The JsonDecode() will takes a JSON encoded string and converts it into a PHP variable. 
+	 * @param various $Variable Required. No default. The JSON string to be decoded. This function only works with UTF-8 encoded data. 
+	 * @param boolean $Array Optional. Default is True. Options are True or False. When true, returned objects will be converted into associative arrays.
+	 * @return various $JsonDecode Returns the value encoded in json in appropriate PHP type. Values true, false and null (case-insensitive) are returned as TRUE, FALSE and NULL respectively. NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit. 
+	 */
 
 	public function JsonDecode($Variable, $Array = True) {
 		if($Array == True) {
@@ -25,13 +87,19 @@ class DataManipulation {
 		return $JsonDecode;
 	}
 
+	/**
+	 * The JsonEncode will returns a string containing the JSON representation of value. 
+	 * @param various $Variable Required. No default. The value being encoded. This can be any type except a resource. This function only works with UTF-8 encoded data. 
+	 * @param boolean $PrettyPrint Optional. Default is False. Options are True or False. This option will require PHP core 5.4.0. If parameter is true, and PHP version is lower than 5.4.0, an error is thrown. 
+	 * @return various $JsonEncode Returns a JSON encoded string on success or FALSE on failure. 
+	 */
+
 	public function JsonEncode($Variable, $PrettyPrint = False) {
 		if($PrettyPrint == True) {
 			$JsonEncode = json_encode($Variable, JSON_PRETTY_PRINT);
 		} else {
 			$JsonEncode = json_encode($Variable);
 		}
-		
 		return $JsonEncode;
 	}
 
@@ -62,7 +130,6 @@ class DataManipulation {
 		} else {
 			$TypeCast = (string) $Variable;
 		}
-
 		return $TypeCast;
 	}
 
@@ -82,7 +149,6 @@ class DataManipulation {
 		} else {
 			$IsEmpty = False;
 		}
-
 		return $IsEmpty;
 	}
 
@@ -97,9 +163,7 @@ class DataManipulation {
 	}
 
 	public function MakeUnset($Variable) {
-		//$MakeUnset = unset($Variable);
 		unset($Variable);
-		//return $MakeUnset;
 	}
 
 	/**
@@ -180,44 +244,6 @@ class DataManipulation {
 	}
 
 	/**
-	 * SortArray() will sort a given array. Will reorder array and return True upon success, and False upon failure. 
-	 * @param array $Array Required. No default. The array to sort. 
-	 * @param text $Column Optional. Default is 'Key'. Acceptable options are 'Key', and 'Value'. Sort by value or key.
-	 * @param text $Order Optional. Default is 'Ascending'. Acceptable options are 'Ascending', and 'Descending'. Sort the array either ascending or descending. 
-	 * @param text $SortType Optional. Default is 'Regular'. Acceptable options are:
-	 * 'Regular' - Default. Compare items normally. Does not change types. Value is 0. 
-	 * 'Numeric' - Compare line items numerically. Value is 1.
-	 * 'String' - Compare items as strings. Value is 2. 
-	 * 'Natural' - Compare items as string, using natural ordering. Value is 3. 
-	 * @return array $SortArray. Will reorder array and return True upon success, and False upon failure.
-	 */
-
-	public function SortArray($Array, $Column = 'Key', $Order = 'Ascending', $SortType = 'Regular') {
-		if($SortType == 'Regular') {
-			$SortType = SORT_REGULAR;
-		} elseif($SortType == 'Numeric') {
-			$SortType = SORT_NUMERIC;
-		} elseif($SortType == 'String') {
-			$SortType = SORT_STRING;
-		} elseif($SortType == 'Natural') {
-			$SortType = SORT_NATURAL;
-		} else {
-			$SortType = SORT_REGULAR; /* Defaults to 'Regular' if can not determine $SortType. */
-		}
-
-		if($Column == 'Key' && $Order == 'Ascending') {
-			$SortArray = ksort($Array, $SortType);
-		} elseif($Column == 'Key' && $Order == 'Descending') {
-			$SortArray = krsort($Array, $SortType);
-		} elseif($Column == 'Value' && $Order == 'Ascending') {
-			$SortArray = asort($Array, $SortType);
-		} elseif($Column == 'Value' && $Order == 'Descending') {
-			$SortArray = arsort($Array, $SortType);
-		}
-		return $SortArray;
-	}
-
-	/**
 	 * IsNull() will check to see if the given variable is null. Will return True if null, False if not null. 
 	 * @param various $Variable Required. No default. Variable to be checked. 
 	 * @return boolean Will return True if null, False if not null.
@@ -232,7 +258,7 @@ class DataManipulation {
 	}
 
 	/**
-	 * The Count() function will count all elements in an array, or something in an object.
+	 * The Count() function will count all line items in an array.
 	 * @param array $Array Required. No default. 
 	 * @return number $Count 
 	 */
@@ -258,33 +284,49 @@ class DataManipulation {
 		}
 	}
 
+	/**
+	 * The SortArrayByKey() will sort a given array by key. See also SortArrayByValue(). 
+	 * @param array $Array Required. No default. Array to be sorted. 
+	 * @param string $Order Optional. Default is Ascending. Options are Ascending and Descending. 
+	 * @return array Will return array if the given array is successfully sorted. Will return false if the given array failed to be sorted. 
+	 */
+
 	public function SortArrayByKey($Array, $Order = 'Ascending') {
-		if($Order == 'Ascending') {
-			return ksort($Array);
-		} elseif($Order == 'Descending') {
-			return krsort($Array);
+		if(strtolower($Order) == 'ascending') {
+			$SortArrayByKey = ksort($Array);
+		} elseif(strtolower($Order) == 'descending') {
+			$SortArrayByKey = krsort($Array);
 		} else {
-			return ksort($Array);
+			// return ksort($Array);
+			die('Error: The given array could not be sorted. Exiting...');
 		}
+		return $SortArrayByKey;
 	}
 
+	/**
+	 * The SortArrayByValue() will sort a given array by value. See also SortArrayByKey(). 
+	 * @param array $Array Required. No default. Array to be sorted. 
+	 * @param string $Order Optional. Default is Ascending. Options are Ascending and Descending. 
+	 * @return array Will return array if the given array is successfully sorted. Will return false if the given array failed to be sorted. 
+	 */
+
 	public function SortArrayByValue($Array, $Order = 'Ascending') {
-		if($Order == 'Ascending') {
+		if(strtolower($Order) == 'ascending') {
 			$SortArrayByValue = asort($Array);
-		} elseif($Order == 'Descending') {
+		} elseif(strtolower($Order) == 'descending') {
 			$SortArrayByValue = arsort($Array);
 		} else {
-			$SortArrayByValue = asort($Array);
+			die('Error: The given array could not be sorted. Exiting...');
 		}
 		return $SortArrayByValue;
 	}
 
-	public function StringToArray($String, $Delimiter = ', ') {
+	public function StringToArray($String, $Delimiter = ',') {
 		$StringToArray = explode($Delimiter, $String);
 		return $StringToArray;
 	}
 
-	public function ArrayToString($Array, $Delimiter = ', ') {
+	public function ArrayToString($Array, $Delimiter = ',') {
 		$ArrayToString = implode($Delimiter, $Array);
 		return $ArrayToString;
 	}
